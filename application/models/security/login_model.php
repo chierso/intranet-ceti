@@ -14,7 +14,7 @@ class Login_model extends CI_Model
 		$this->db->limit(1);
 		$query = $this -> db -> get();
 		$data = $query->result();
-		if($data[0]->password==$password && $query->num_rows()==1){
+		if($query->num_rows()==1 && $data[0]->password==$password){
 		$this->session->set_userdata('E-Mail',$data[0]->email);
 		$this->session->set_userdata('Validado',"true");
 		return true;

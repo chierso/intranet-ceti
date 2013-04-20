@@ -26,7 +26,7 @@ class login extends CI_Controller {
 	public function index()
 	{
 			$this->control_session->verifyLogin();
-			$this->load->view('loginbeta');
+			$this->load->view('login');
 		
 	}
  
