@@ -10,7 +10,7 @@
 	<div class="container">
 	<h1>Intranet Académica</h1>
 	<div id="form_login">
-      <form class="form-signin">
+      <form class="form-signin" method="post" action="<?php echo base_url('login/comprobar_login')?>">
         <h2 class="form-signin-heading">Acceso al sistema</h2>
         <input type="text" required class="input-block-level" name="email" placeholder="Correo electrónico">
         <input type="password" required class="input-block-level" name="password" placeholder="Contraseña">
