@@ -1,5 +1,4 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 class login extends CI_Controller {
 
 	/**
@@ -23,11 +22,11 @@ class login extends CI_Controller {
          parent::__construct();
       }
 	
+	
 	public function index()
 	{
 			$this->control_session->verifyLogin();
 			$this->load->view('login');
-		
 	}
  
      public function sendLogin()
