@@ -1,5 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class login extends CI_Controller {
+
+class home extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -22,26 +23,10 @@ class login extends CI_Controller {
          parent::__construct();
       }
 	
-	
 	public function index()
 	{
-			$this->control_session->verifyLogin();
-			$this->load->view('login');
-	}
- 
-     public function sendLogin()
-     {
-         	$this->load->model("security/login_model");
-			$usuario=$this->input->post('txt_usuario',TRUE)."";
-			$password=$this->input->post('txt_password',TRUE)."";
-			$valor=$this->login_model->tryLogin("$usuario","$password");	
-			redirect('home', 'refresh');
-       }	
-       
-	public function exitSession()
-	{
-		$this->session->sess_destroy();
-	   	redirect('login', 'refresh');	
+			$this->control_session->verifyLoginOnHome();
+			$this->load->view('home');
 	}
    
 }
