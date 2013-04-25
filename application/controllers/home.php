@@ -26,7 +26,9 @@ class home extends CI_Controller {
 	public function index()
 	{
 			$this->control_session->verifyLoginOnHome();
-			$this->load->view('home');
+			$data['title'] = "Intranet Académica";
+			$data['content'] = "home"; 
+			$this->load->view('template/layout',$data);
 	}
    
 }

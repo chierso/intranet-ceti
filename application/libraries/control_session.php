@@ -11,7 +11,7 @@
 		    }
 			public function verifyLogin(){
 				if ($this->ci ->session->userdata('Validado')=='true') 
-		        {        	     	
+		        {	       	     	
 					redirect('home', 'refresh');
 				}
 			}
