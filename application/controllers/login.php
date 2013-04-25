@@ -20,11 +20,15 @@ class login extends CI_Controller {
          	$this->load->model("security/login_model");
 			$usuario=$this->input->post('txt_usuario',TRUE)."";
 			$password=$this->input->post('txt_password',TRUE)."";
-			$valor=$this->login_model->tryLogin("$usuario","$password");	
-			redirect('home', 'refresh');
+			$valor=$this->login_model->tryLogin("$usuario","$password");
+			if($valor)
+			{
+				redirect('home', 'refresh');
+			}	
+			
        }	
        
-	public function exitSession()
+	public function logout()
 	{
 		$this->session->sess_destroy();
 	   	redirect('login', 'refresh');	

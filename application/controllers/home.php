@@ -1,22 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class home extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
 	
 	public function __construct()
       {
@@ -26,6 +10,17 @@ class home extends CI_Controller {
 	public function index()
 	{
 			$this->control_session->verifyLoginOnHome();
+			$config = array('IdUsuario'=>$this->session->userdata('IdUsuario'));				
+			$this->load->library('acl',$config);				
+			$this->session->set_userdata('ACL',$this->acl->getPermisos()); 
+			$arreglo_pes = $this->acl->getPermisos();  
+			$holi = "";
+			foreach($arreglo_pes as $key_v)
+			{
+				$holi.= "".$key_v['Permiso'];
+				
+			}
+			echo "<script>alert('".$holi."')</script>";
 			$data['title'] = "Intranet Académica";
 			$data['content'] = "home"; 
 			$this->load->view('template/layout',$data);

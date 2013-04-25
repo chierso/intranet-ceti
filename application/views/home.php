@@ -5,7 +5,7 @@
     <ul class="nav">
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">Link</a></li>
-      <li><a href="#">Link</a></li>
+      <li><a href="<?php echo site_url('login/logout'); ?>">Cerrar sesión</a></li>
     </ul>
   </div>
 </div>
