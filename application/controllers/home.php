@@ -14,13 +14,7 @@ class home extends CI_Controller {
 			$this->load->library('acl',$config);				
 			$this->session->set_userdata('ACL',$this->acl->getPermisos()); 
 			$arreglo_pes = $this->acl->getPermisos();  
-			$holi = "";
-			foreach($arreglo_pes as $key_v)
-			{
-				$holi.= "".$key_v['Permiso'];
-				
-			}
-			echo "<script>alert('".$holi."')</script>";
+				echo "<script>alert('".print_r($arreglo_pes)."')</script>";
 			$data['title'] = "Intranet Académica";
 			$data['content'] = "home"; 
 			$this->load->view('template/layout',$data);
