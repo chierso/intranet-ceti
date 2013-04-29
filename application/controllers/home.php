@@ -4,11 +4,12 @@
 	public function __construct()
       {
          parent::__construct();
+		 $this->control_session->verifyLoginOnHome();
       }
 	
 	public function index()
 	{
-			$this->control_session->verifyLoginOnHome();
+			
 			$config = array('IdUsuario'=>$this->session->userdata('IdUsuario'));				
 			$this->load->library('acl',$config);				
 			$this->session->set_userdata('ACL',$this->acl->getPermisos()); 
