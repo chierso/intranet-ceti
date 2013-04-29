@@ -72,7 +72,7 @@ class Acl
 	}
 
 	function getTodoLosRoles($format='ids') {
-		$format = strtolower($format);
+		//$format = strtolower($format);
 		//$strSQL = "SELECT * FROM `".DB_PREFIX."rol` ORDER BY `NombreRol` ASC";
 		$this->ci->db->order_by('name','asc');
 		$sql = $this->ci->db->get('tbl_role');
@@ -92,10 +92,10 @@ class Acl
 	}
 
 	function getTodosLosPermisos($format='ids') {
-		$format = strtolower($format);
+		//$format = strtolower($format);
 		//$strSQL = "SELECT * FROM `".DB_PREFIX."permissions` ORDER BY `clavePermiso` ASC";
 
-		$this->ci->db->order_by('key_permission','asc');
+		$this->ci->db->order_by('name','asc');
 		$sql = $this->ci->db->get('tbl_permission');
 		$data = $sql->result();
 
@@ -128,16 +128,17 @@ class Acl
 		$permisos = array();
 		foreach( $data as $row )
 		{
-			$pK = strtolower($this->getClavePermisoPorId($row->id_permission));
+			//$pK = strtolower($this->getClavePermisoPorId($row->id_permission));
+			$pK = ($this->getClavePermisoPorId($row->id_permission));
 			if ($pK == '') { continue; }
-			if ($row->Valor === '1') {
-				$hP = true;
+			if ($row->valor === '1') {
+				$hP = TRUE;
 			} else {
-				$hP = false;
+				$hP = FALSE;
 			}
 			$permisos[$pK] = array('ClavePermiso' => $pK,'inheritted' => true,'Valor' => $hP,'NombrePermiso' => $this->getNombrePermisoPorId($row->id_permission),'IdPermiso' => $row->id_permission);
 		}
-		return $permisos;
+		return ($permisos);
 	}
 
 	function getPermisosDeUsuario($IdUsuario) {
@@ -151,7 +152,8 @@ class Acl
 		$permisos = array();
 		foreach( $data as $row )
 		{
-			$pK = strtolower($this->getClavePermisoPorId($row->IdPermiso));
+			//$pK = strtolower($this->getClavePermisoPorId($row->IdPermiso));
+			$pK = ($this->getClavePermisoPorId($row->IdPermiso));
 			if ($pK == '') { continue; }
 			if ($row->Valor == '1') {
 				$hP = true;

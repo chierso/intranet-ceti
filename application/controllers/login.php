@@ -11,8 +11,7 @@ class login extends CI_Controller {
 	{
 			$this->control_session->verifyLogin();
 			$data['title']="Acceso a Intranet";
-			$data['content'] = "login";
-			$this->load->view('template/layout',$data);
+			$this->load->view('login',$data);
 	}
  
      public function sendLogin()
