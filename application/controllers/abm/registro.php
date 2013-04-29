@@ -40,5 +40,30 @@
 	    	);
 	    $this->output->set_content_type('json')->set_output(json_encode($data));	
 	}
+
+	public function listarSecciones()
+	{
+		
+	}
 	
+	public function listarAlumnos($pAno,$pSeccion)
+	{
+		$this->load->model("abm/abm_alumno_model");
+		$data = $this->abm_alumno_model->listarAlumnos($pAno,$pSeccion);
+		foreach ($data as $row) {
+			echo $row->name;
+			echo $row->lastname;
+			echo $row->grade;
+			echo $row->section;
+			echo '<br>';
+		}
+	}
+	
+	public function aperturarAno()
+	{		
+		$ano=$this->input->post('txt_ano',TRUE)."";
+		$this->load->model("abm/abm_record_model");
+	    $data=$this->abm_record_model->aperturarAno($ano);
+	    $this->output->set_content_type('json')->set_output(json_encode($data));	
+	}
 }

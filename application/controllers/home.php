@@ -20,6 +20,14 @@
 			$this->load->view('template/layout',$data);
 	}
 	
+	public function aperturarAno()
+	{
+			$data['title'] = "Aperturar año académico - Intranet Académica";
+			$data['content'] = "aperturarAno"; 
+			$data['h1'] = "Aperturar nuevo Año";
+			$this->load->view('template/layout',$data);
+	}
+	
 	public function addAlumn()
 	{
 			$data['title'] = "Agregar Alumno - Intranet Académica";

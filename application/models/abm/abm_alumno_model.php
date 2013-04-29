@@ -6,63 +6,77 @@ class abm_alumno_model extends CI_Model {
         parent::__construct();
     }   
 	
+	function listarAlumnos($pAno,$pSeccion){
+		$sql = 'SELECT p.name, p.lastname, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
+		$query = $this->db->query($sql);
+		//echo $sql;
+		$data = $query->result();
+		/*foreach ($data as $row) {
+			echo $row->p.name;
+			echo $row->p.lastname;
+			echo $row->a.grade;
+			echo $row->a.section;
+			
+		}*/
+		return $query->result();
+	}
+	
   	function consultarAlumnos($parametro,$tipo,$inicio,$tamanio,$sEcho)
     {
 
-	    	$this->db->select('DNI,concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres) as NombresCompletos,NombreCarreraProfesional,NumCiclo,CondicionFinal ',false);			
+	    $this->db->select('DNI,concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres) as NombresCompletos,NombreCarreraProfesional,NumCiclo,CondicionFinal ',false);			
+	    $this->db->from('beneficiado');
+		$this->db->join('persona','beneficiado.IdPersona=persona.IdPersona');
+		$this->db->join('carrera_profesional','persona.IdCarreraProfesional = carrera_profesional.IdCarreraProfesional');		
+		$this->db->limit($tamanio,$inicio);
+    	if($tipo==1)
+		{
+	    	$this->db->like('DNI',$parametro,'after');
+		}
+		else 
+		{
+			$this->db->like('concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres)',$parametro,'after');
+		}			
+		$sqlBeneficiado= $this->db->get();
+		   $dataBeneficiado = $sqlBeneficiado->result();
+		$rowcount = $sqlBeneficiado->num_rows();
+		$lista_coincidencias=array();
+		
+		$ouput=null;
+		$output = array(
+					"sEcho" => intval($sEcho),
+					"iTotalRecords" => 0,
+					"iTotalDisplayRecords" => 0,
+					"aaData" => array()
+				);
+		if($sqlBeneficiado->num_rows()!=0)
+		{
+					
+			foreach ($dataBeneficiado as $value) 
+			{
+				$lista_coincidencias[]=$value;
+			}			
+			$this->db->select('count(*) as total');		
 	    	$this->db->from('beneficiado');
 			$this->db->join('persona','beneficiado.IdPersona=persona.IdPersona');
-			$this->db->join('carrera_profesional','persona.IdCarreraProfesional = carrera_profesional.IdCarreraProfesional');		
-			$this->db->limit($tamanio,$inicio);
-    		if($tipo==1)
+			if($tipo==1)
 			{
-    		$this->db->like('DNI',$parametro,'after');
+    			$this->db->like('concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres)',$parametro,'after');
 			}
 			else 
 			{
-			$this->db->like('concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres)',$parametro,'after');
-			}			
-			$sqlBeneficiado= $this->db->get();
-		    $dataBeneficiado = $sqlBeneficiado->result();
-			$rowcount = $sqlBeneficiado->num_rows();
-			$lista_coincidencias=array();
-			
-			$ouput=null;
-			$output = array(
-						"sEcho" => intval($sEcho),
-						"iTotalRecords" => 0,
-						"iTotalDisplayRecords" => 0,
-						"aaData" => array()
-					);
-			if($sqlBeneficiado->num_rows()!=0)
-			{
-						
-						foreach ($dataBeneficiado as $value) 
-						{
-							$lista_coincidencias[]=$value;
-						}			
-						$this->db->select('count(*) as total');		
-				    	$this->db->from('beneficiado');
-						$this->db->join('persona','beneficiado.IdPersona=persona.IdPersona');
-						if($tipo==1)
-						{
-			    			$this->db->like('concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres)',$parametro,'after');
-						}
-						else 
-						{
-							$this->db->like('concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres)',$parametro,'after');
-						}
-						$sqlTotal= $this->db->get();
-					    $dataTotal = $sqlTotal->result();
-						$output = array(
-							"sEcho" => intval($sEcho),
-							"iTotalRecords" => $rowcount,
-							"iTotalDisplayRecords" => $dataTotal[0]->total,
-							"aaData" => $lista_coincidencias
-						);
-				
+				$this->db->like('concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres)',$parametro,'after');
 			}
-			return $output ;
+			$sqlTotal= $this->db->get();
+		    $dataTotal = $sqlTotal->result();
+			$output = array(
+				"sEcho" => intval($sEcho),
+				"iTotalRecords" => $rowcount,
+				"iTotalDisplayRecords" => $dataTotal[0]->total,
+				"aaData" => $lista_coincidencias
+			);
+		}
+		return $output ;
     }
 	function registrarAlumno($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion)
 	{
@@ -105,7 +119,6 @@ class abm_alumno_model extends CI_Model {
 	
 	function exportarBeneficiados($parametro,$tipo)
     {
-
 	    	$this->db->select('DNI,NombresCompletos,NombreCarreraProfesional,NumCiclo,CondicionFinal');				
 	    	$this->db->from('beneficiado');
 			$this->db->join('carrera_profesional','beneficiado.IdCarreraProfesional = carrera_profesional.IdCarreraProfesional');

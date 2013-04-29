@@ -44,7 +44,7 @@
 			</div>
 			<div class="span4">
 				<label class="etiqueta">Fecha Nacimiento</label>
-				 	<div class="input-append date" id="dpYears" data-date="19-09-1999" data-date-format="dd/mm/yyyy" data-date-viewmode="years">
+				 	<div class="input-append date" id="dpYears" data-date="19-09-1999" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
 				  		<input class="span9" size="16" type="text" placeholder="dd-mm-yy" name="txt_fec_nacimiento" readonly>
 						<span class="add-on"><i class="icon-th"></i></span>
 					</div>
