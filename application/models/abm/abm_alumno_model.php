@@ -80,6 +80,8 @@ class abm_alumno_model extends CI_Model {
     }
 	function registrarAlumno($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion)
 	{
+		$this->load->model("abm/abm_user_model");
+		$this->abm_user_model->registrarUsuario($pCorreo,'alum');
 		$this->db->trans_begin();
 		$dataPersona = array(
 				"name"		=> $pNombres,

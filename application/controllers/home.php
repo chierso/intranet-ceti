@@ -67,8 +67,9 @@
 	
 	public function asignarDocente()
 	{
-			$data['title'] = "Agregar Docenteo - Intranet Académica";
-			$data['content'] = "addDocenteo"; 
+			$data['title'] = "Asignar Docente - Intranet Académica";
+			$data['content'] = "asignarDocente";
+			$data['h1'] = "Asignar Docente a Curso"; 
 			$this->load->view('template/layout',$data);
 	}
 
@@ -83,6 +84,13 @@
 	{
 			$data['title'] = "Agregar Docenteo - Intranet Académica";
 			$data['content'] = "addDocenteo"; 
+			$this->load->view('template/layout',$data);
+	}
+
+	public function gestionCurso()
+	{
+			$data['title'] = "ABM Cursos - Intranet Académica";
+			$data['content'] = "abm/abm_gestionCurso"; 
 			$this->load->view('template/layout',$data);
 	}
 	
