@@ -103,6 +103,10 @@
 			$this->load->view('abm/abm_asignacion',$data);
 	}
 	
+	public function abm_alumno()
+	{
+			redirect('abm/abm_alumno', 'refresh');
+	}
 }
 
 /* End of file welcome.php */

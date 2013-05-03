@@ -6,19 +6,21 @@ class abm_alumno_model extends CI_Model {
         parent::__construct();
     }   
 	
-	function listarAlumnos($pAno,$pSeccion){
-		$sql = 'SELECT p.name, p.lastname, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
+	function listarAlumnos(){
+		//$sql = 'SELECT concat(p.name," " ,p.lastname) as Alumno, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
+		$sql = 'SELECT a.id_alumn, concat(p.name," " ,p.lastname) as Alumno, a.grade as Grade, a.section as Section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person;';
 		$query = $this->db->query($sql);
-		//echo $sql;
 		$data = $query->result();
-		/*foreach ($data as $row) {
-			echo $row->p.name;
-			echo $row->p.lastname;
-			echo $row->a.grade;
-			echo $row->a.section;
-			
-		}*/
-		return $query->result();
+		return $data;
+	}
+	
+	function listarAlumnosGrado($pAno,$pSeccion){
+		//$sql = 'SELECT concat(p.name," " ,p.lastname) as Alumno, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
+		$sql = 'SELECT a.id_alumn, concat(p.name," " ,p.lastname) as Alumno, a.grade as Grade, a.section as Section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'" ;';
+		echo '<script>alert("'.$sql.'")</script>';
+		$query = $this->db->query($sql);
+		$data = $query->result();
+		return $data;
 	}
 	
   	function consultarAlumnos($parametro,$tipo,$inicio,$tamanio,$sEcho)
@@ -115,6 +117,16 @@ class abm_alumno_model extends CI_Model {
 		    $this->db->trans_commit();
 		    $data="Correcto! Los datos se cargaron correctamente.";
 		}
+	
+	/*	$queryUser = $this->db->query('SELECT email, password FROM tbl_users  ORDER BY id_user DESC;');
+		$result = $queryUser->result();
+		$this->load->library('email');
+		$this->email->from('intranet@institutosantarosa.com', 'IETI Santa Rosa');
+		$this->email->to($pCorreo); 
+		$this->email->subject('Nuevo usuario registrado!');
+		$this->email->message('Su cuenta ha sido correctamente habilitada, sus datos son : <br /> Usuario: '.$result[0]->email.' - Contraseña: '.$result[0]->password);	
+		$this->email->send();
+	*/			
 		return $data;
 	}
 
