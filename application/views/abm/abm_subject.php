@@ -22,16 +22,15 @@ foreach($css_files as $file): ?>
 		  <div class="navbar-inner">
 		    <a class="brand" href="#">IETI Santa Rosa de Lima</a>
 		    <ul class="nav">
-		      <li class="active"><a href="#">Home</a></li>
-		      <li><a href="#">Link</a></li>
-		      <li><a href="<?php echo site_url('login/logout'); ?>">Cerrar sesión</a></li>
+		      <li><a href="<?php echo base_url("")?>">Home</a></li>
 		      <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acciones <b class="caret"></b></a>
                         <?php
             	echo $this->load->view('template/nav');
             ?> 
              </li>
-		    </ul>
+		     <li><a href="<?php echo site_url('login/logout'); ?>">Cerrar sesión</a></li>
+		   </ul>
 		  </div>
 		</div>
 		<div class="row-fluid">

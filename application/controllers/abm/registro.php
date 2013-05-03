@@ -38,7 +38,9 @@
 											    $grado, 
 											    $seccion
 	    	);
-	    $this->output->set_content_type('json')->set_output(json_encode($data));	
+		$datos['title']= $data;
+		$datos['vista']='<h2>'.$data.'</h2><br /><a class="btn btn-info" href="javascript:history.back(1)">Regresar</a>';
+		$this->load->view('template/layout',$datos);	
 	}
 
 	public function registrarDocente()
@@ -64,7 +66,10 @@
 											    $nacimiento, 
 											    $correo
 	    	);
-	    $this->output->set_content_type('json')->set_output(json_encode($data));	
+	    $datos['title']= $data;
+		$datos['vista']='<h2>'.$data.'</h2><br /><a class="btn btn-info" href="javascript:history.back(1)">Regresar</a>';
+		$this->load->view('template/layout',$datos);
+	    //$this->output->set_content_type('json')->set_output(json_encode($data));	
 	}
 
 	public function setDocente()

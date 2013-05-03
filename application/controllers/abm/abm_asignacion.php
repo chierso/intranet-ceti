@@ -13,10 +13,13 @@
 		$this->load->view('abm/abm_asignacion',$data);
 	}
 	
-	public function listarCurso()
+	public function asignar_tutoria()
 	{
-		//$this->grocery_crud->set_theme('twitter-bootstrap');
-		
+		$pIdDocente	=	$this->input->post('id_docente',TRUE);
+		$pAno		=	$this->input->post('cbx_grado',TRUE)."";
+		$pSeccion	=	$this->input->post('rbt_seccion',TRUE)."";
+		$this->load->model("achademyc_model");
+		$this->achademyc_model->asignar_tutoria(intval($pIdDocente), $pAno, $pSeccion);
 	}
 
 }
