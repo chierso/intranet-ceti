@@ -58,6 +58,25 @@ class abm_record_model extends CI_Model {
 		return $data;
 	}
 
+	function agregarRegistration($pIdAlumno,$pGradeSection,$pYear){
+		$this->db->trans_begin();
+		$query = $this->db->query(''); // this.db.query();
+			$dataRegistration = array(
+				"id_alumn" 		=>	$pIdAlumno,
+				"grade_section"	=>  $pGradeSection,
+				"year"			=>  $pYear 
+			);
+			$this->db->insert('tbl_registration',$dataRegistration);
+		$this->db->trans_complete();
+		if($this->db->trans_status()==FALSE){
+			$this->db->trans_roolback();			
+		}
+		else{
+			$this->db->trans_commit();
+		}
+		return "Se insertó correctamente";
+	}
+
 }
 ?>
 

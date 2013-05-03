@@ -85,26 +85,26 @@ class abm_alumno_model extends CI_Model {
 		$this->load->model("abm/abm_user_model");
 		$this->abm_user_model->registrarUsuario($pCorreo,'alum');
 		$this->db->trans_begin();
-		$dataPersona = array(
-				"name"		=> $pNombres,
-				"lastname" 	=> $pApellidos,
-				"address" 	=> $pDireccion,
-				"phone"		=> $pTelefono,
-				"cellphone"	=> $pCelular,
-				"dni"		=> $pDni,
-				"sex"		=> $pSexo,
-				"e-mail" 	=> $pCorreo,
-				"born"		=> $pNacimiento
+			$dataPersona = array(
+					"name"		=> $pNombres,
+					"lastname" 	=> $pApellidos,
+					"address" 	=> $pDireccion,
+					"phone"		=> $pTelefono,
+					"cellphone"	=> $pCelular,
+					"dni"		=> $pDni,
+					"sex"		=> $pSexo,
+					"e-mail" 	=> $pCorreo,
+					"born"		=> $pNacimiento
+				);
+			$this->db->insert('tbl_person', $dataPersona); 
+			$IdPersona = $this->db->insert_id();
+			$dataAlumno = array(			
+					 "id_person"=>$IdPersona,   
+				     "grade"=>$pAno,
+				     "condition"=>"H"
+				);
+			$this->db->insert('tbl_alumn', $dataAlumno); 
 			);
-		$this->db->insert('tbl_person', $dataPersona); 
-		$IdPersona = $this->db->insert_id();
-		$dataAlumno = array(			
-				 "id_person"=>$IdPersona,   
-			     "grade"=>$pAno,
-			     "section"=>$pSeccion,
-			     "condition"=>"H"
-			);
-		$this->db->insert('tbl_alumn', $dataAlumno); 
 		$this->db->trans_complete();
 		$data=null;
 		if ($this->db->trans_status() === FALSE)
