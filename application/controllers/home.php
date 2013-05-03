@@ -5,6 +5,7 @@
       {
          parent::__construct();
 		 $this->control_session->verifyLoginOnHome();
+		 $this->load->library('grocery_CRUD');
       }
 	
 	public function index()
@@ -89,9 +90,9 @@
 
 	public function gestionCurso()
 	{
-			$data['title'] = "ABM Cursos - Intranet Académica";
-			$data['content'] = "abm/abm_gestionCurso"; 
-			$this->load->view('template/layout',$data);
+			$this->grocery_crud->set_table('tbl_subject');
+			$output = $this->grocery_crud->render();
+			$this->load->view('abm/abm_subject',$output);
 	}
 	
 }

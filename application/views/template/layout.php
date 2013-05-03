@@ -27,23 +27,27 @@
 		      <li class="active"><a href="#">Home</a></li>
 		      <li><a href="#">Link</a></li>
 		      <li><a href="<?php echo site_url('login/logout'); ?>">Cerrar sesión</a></li>
+		      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acciones <b class="caret"></b></a>
+                        <?php
+            	echo $this->load->view('template/nav');
+            ?> 
+             </li>
 		    </ul>
 		  </div>
 		</div>
 		<div class="row-fluid">
-		<div class="span3">
-          <div class="well sidebar-nav">
-            <?php
-            	echo $this->load->view('template/nav');
-            ?> 
-          </div><!--/.well -->
-        </div>
-		<div class="span9">
+		<div class="span12">
 			<h1><?php if(isset($h1)) echo $h1; ?></h1>
-			<?php echo $this->load->view($content) ?>  
+			<?php echo $this->load->view($content) ?> 
+			<?php if(isset($vista)){
+				echo $vista;
+			} 
+			?>
 		</div>
 			<?php echo $this->load->view('template/_footer') ?> 
    		</div>
     </div> <!-- /container -->   
+    <script src="<?php echo base_url("public/js/bootstrap-dropdown.js")?>"></script>
 </body>
 </html>

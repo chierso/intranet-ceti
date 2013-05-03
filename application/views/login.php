@@ -33,9 +33,7 @@
 			echo "<br/>";
 			
 			// Generamos el botón de submit
-			echo '<label class="checkbox">
-		          <input type="checkbox" value="remember-me"> Recordarme
-		        </label>
+			echo '
 		        <button class="btn btn-large btn-primary" type="submit">Acceder</button>';
 			echo form_close();
 		?>
