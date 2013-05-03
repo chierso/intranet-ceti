@@ -5,6 +5,7 @@
       {
          parent::__construct();
 		 $this->control_session->verifyLoginOnHome();
+		 $this->load->library('grocery_CRUD');
       }
 	
 	public function index()
@@ -67,8 +68,9 @@
 	
 	public function asignarDocente()
 	{
-			$data['title'] = "Agregar Docenteo - Intranet Académica";
-			$data['content'] = "addDocenteo"; 
+			$data['title'] = "Asignar Docente - Intranet Académica";
+			$data['content'] = "asignarDocente";
+			$data['h1'] = "Asignar Docente a Curso"; 
 			$this->load->view('template/layout',$data);
 	}
 
@@ -84,6 +86,21 @@
 			$data['title'] = "Agregar Docenteo - Intranet Académica";
 			$data['content'] = "addDocenteo"; 
 			$this->load->view('template/layout',$data);
+	}
+
+	public function gestionCurso()
+	{
+			$this->grocery_crud->set_table('tbl_subject');
+			$output = $this->grocery_crud->render();
+			$this->load->view('abm/abm_subject',$output);
+	}
+	
+	public function abm_asignacion()
+	{
+			$this->load->model("achademyc_model");
+			$data['docentes'] = $this->achademyc_model->listarDocentes();
+			$data['tutoria'] = $this->achademyc_model->listarTutoria();
+			$this->load->view('abm/abm_asignacion',$data);
 	}
 	
 }

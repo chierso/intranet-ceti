@@ -1,8 +1,7 @@
 	<?php
 		$this->load->helper("form");
-		echo form_open("login/sendLogin");
+		echo form_open("abm/registro/registrarDocente");
 	?>
-	
 	
 	<div class="row-fluid">
 		<div class="span6">
@@ -45,7 +44,7 @@
 			</div>
 			<div class="span4">
 				<label class="etiqueta">Fecha Nacimiento</label>
-				 	<div class="input-append date" id="dpYears" data-date="19-09-1999" data-date-format="dd/mm/yyyy" data-date-viewmode="years">
+				 	<div class="input-append date" id="dpYears" data-date="19-09-1999" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
 				  		<input class="span9" size="16" type="text" placeholder="dd-mm-yy" name="txt_fec_nacimiento" readonly>
 						<span class="add-on"><i class="icon-th"></i></span>
 					</div>
@@ -54,13 +53,13 @@
 				<div class="input-prepend">
 					<label for="prepended Input">Correo electrónico</label>			
 					<span class="add-on">@</span>
-					<input class="span12" id="prepended Input" name="txt_ciudad_procedencia" type="email">					
+					<input class="span12" id="prepended Input" name="txt_email" type="email">					
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<button class="btn btn-large btn-primary" type="submit">Acceder</button>';
+	<button class="btn btn-success" type="submit">Agregar</button>
+	<button class="btn" type="reset">Cancelar</button>
 	<?php
 		echo form_close();
 	?>

@@ -80,6 +80,8 @@ class abm_alumno_model extends CI_Model {
     }
 	function registrarAlumno($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion)
 	{
+		$this->load->model("abm/abm_user_model");
+		$this->abm_user_model->registrarUsuario($pCorreo,'alum');
 		$this->db->trans_begin();
 		$dataPersona = array(
 				"name"		=> $pNombres,
@@ -106,12 +108,12 @@ class abm_alumno_model extends CI_Model {
 		if ($this->db->trans_status() === FALSE)
 		{
 		    $this->db->trans_rollback();
-		    $data=array("tipoMensaje"=>"E","mensaje"=>"No se pudo registrar");
+		    $data="Error! No se pudo registrar.";
 		}
 		else
 		{
 		    $this->db->trans_commit();
-		    $data=array("tipoMensaje"=>"S","mensaje"=>"El registro del beneficiado");
+		    $data="Correcto! Los datos se cargaron correctamente.";
 		}
 		return $data;
 	}
