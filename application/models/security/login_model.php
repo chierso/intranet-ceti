@@ -15,12 +15,10 @@ class Login_model extends CI_Model
 		$query = $this -> db -> get(); // SELECT id,email,password FROM usuarios WHERE 'email' = 'email' LIMIT 0,1
 		$data = $query->result(); // OBTIENES EL RESULTSET DE LA CONSULTA ANTERIOR
 		$this->load->model("achademyc_model");
-		$year = $this->achademyc_model->anoVigente();
 		if($query->num_rows()==1 && $data[0]->password==$password){
 		$this->session->set_userdata('IdUsuario',$data[0]->id_user);
 		$this->session->set_userdata('E-Mail',$data[0]->email);
 		$this->session->set_userdata('Validado',"TRUE");
-		$this->session->set_userdata('Year',$year);
 		return true;
 	}
 		return false;

@@ -119,8 +119,6 @@
 			echo '<br>';
 		}
 	}
->>>>>>> b30dabe6f049e22d6191ccb0bb6ad14d1c8f2026
-	
 
 	public function aperturarAno()
 	{		

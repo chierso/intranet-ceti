@@ -104,7 +104,7 @@ class abm_alumno_model extends CI_Model {
 				     "condition"=>"H"
 				);
 			$this->db->insert('tbl_alumn', $dataAlumno); 
-			);
+			
 		$this->db->trans_complete();
 		$data=null;
 		if ($this->db->trans_status() === FALSE)
