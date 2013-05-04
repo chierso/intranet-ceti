@@ -10,7 +10,116 @@
 	{
 			$this->load->view('template/layout',$data);
 	}
+
+	public function registrarAlumno()
+	{		
+		$persona		=	$this->input->post('tipo_persona',TRUE)."";
+		$nombres		=	$this->input->post('txt_nombres',TRUE)."";
+		$apellidos		=	$this->input->post('txt_apellidos',TRUE)."";
+		$direccion		=	$this->input->post('txt_direccion',TRUE)."";
+		$dni			=	$this->input->post('txt_dni',TRUE)."";
+		$telefono		=	$this->input->post('txt_telefono',TRUE)."";
+		$celular		=	$this->input->post('txt_celular',TRUE)."";
+		$sexo			=	$this->input->post('rbt_sexo',TRUE)."";
+		$nacimiento		=	$this->input->post('txt_fec_nacimiento',TRUE)."";
+		$correo			=	$this->input->post('txt_email',TRUE)."";
+		$grado			=	$this->input->post('cbx_grado',TRUE)."";
+		$seccion		=	$this->input->post('rbt_seccion',TRUE)."";
+	    $this->load->model("abm/abm_alumno_model");
+	    $data=$this->abm_alumno_model->registrarAlumno($nombres, 
+											    $apellidos, 
+											    $direccion, 
+											    $dni, 
+											    $telefono, 
+											    $celular, 
+											    $sexo, 
+											    $nacimiento, 
+											    $correo, 
+											    $grado, 
+											    $seccion
+	    	);
+		$datos['title']= $data;
+		$datos['vista']='<h2>'.$data.'</h2><br /><a class="btn btn-info" href="javascript:history.back(1)">Regresar</a>';
+		$this->load->view('template/layout',$datos);	
+	}
+
+	public function registrarDocente()
+	{		
+		$persona		=	$this->input->post('tipo_persona',TRUE)."";
+		$nombres		=	$this->input->post('txt_nombres',TRUE)."";
+		$apellidos		=	$this->input->post('txt_apellidos',TRUE)."";
+		$direccion		=	$this->input->post('txt_direccion',TRUE)."";
+		$dni			=	$this->input->post('txt_dni',TRUE)."";
+		$telefono		=	$this->input->post('txt_telefono',TRUE)."";
+		$celular		=	$this->input->post('txt_celular',TRUE)."";
+		$sexo			=	$this->input->post('rbt_sexo',TRUE)."";
+		$nacimiento		=	$this->input->post('txt_fec_nacimiento',TRUE)."";
+		$correo			=	$this->input->post('txt_email',TRUE)."";
+	    $this->load->model("abm/abm_docente_model");
+	    $data=$this->abm_docente_model->registrarDocente($nombres, 
+											    $apellidos, 
+											    $direccion, 
+											    $dni, 
+											    $telefono, 
+											    $celular, 
+											    $sexo, 
+											    $nacimiento, 
+											    $correo
+	    	);
+	    $datos['title']= $data;
+		$datos['vista']='<h2>'.$data.'</h2><br /><a class="btn btn-info" href="javascript:history.back(1)">Regresar</a>';
+		$this->load->view('template/layout',$datos);
+	    //$this->output->set_content_type('json')->set_output(json_encode($data));	
+	}
+
+	public function setDocente()
+	{		
+		$persona		=	$this->input->post('tipo_persona',TRUE)."";
+		$nombres		=	$this->input->post('txt_nombres',TRUE)."";
+		$apellidos		=	$this->input->post('txt_apellidos',TRUE)."";
+		$direccion		=	$this->input->post('txt_direccion',TRUE)."";
+		$dni			=	$this->input->post('txt_dni',TRUE)."";
+		$telefono		=	$this->input->post('txt_telefono',TRUE)."";
+		$celular		=	$this->input->post('txt_celular',TRUE)."";
+		$sexo			=	$this->input->post('rbt_sexo',TRUE)."";
+		$nacimiento		=	$this->input->post('txt_fec_nacimiento',TRUE)."";
+		$correo			=	$this->input->post('txt_email',TRUE)."";
+		$grado			=	$this->input->post('cbx_grado',TRUE)."";
+		$seccion		=	$this->input->post('rbt_seccion',TRUE)."";
+	    $this->load->model("abm/abm_alumno_model");
+	    $data=$this->abm_alumno_model->registrarAlumno($nombres, 
+											    $apellidos, 
+											    $direccion, 
+											    $dni, 
+											    $telefono, 
+											    $celular, 
+											    $sexo, 
+											    $nacimiento, 
+											    $correo, 
+											    $grado, 
+											    $seccion
+	    	);
+	    $this->output->set_content_type('json')->set_output(json_encode($data));	
+	}
+
+	public function listarSecciones()
+	{
+		
+	}
 	
+	public function listarAlumnos($pAno,$pSeccion)
+	{
+		$this->load->model("abm/abm_alumno_model");
+		$data = $this->abm_alumno_model->listarAlumnos($pAno,$pSeccion);
+		foreach ($data as $row) {
+			echo $row->name;
+			echo $row->lastname;
+			echo $row->grade;
+			echo $row->section;
+			echo '<br>';
+		}
+	}
+>>>>>>> b30dabe6f049e22d6191ccb0bb6ad14d1c8f2026
 	
 
 	public function aperturarAno()

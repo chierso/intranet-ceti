@@ -6,19 +6,21 @@ class abm_alumno_model extends CI_Model {
         parent::__construct();
     }   
 	
-	function listarAlumnos($pAno,$pSeccion){
-		$sql = 'SELECT p.name, p.lastname, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
+	function listarAlumnos(){
+		//$sql = 'SELECT concat(p.name," " ,p.lastname) as Alumno, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
+		$sql = 'SELECT a.id_alumn, concat(p.name," " ,p.lastname) as Alumno, a.grade as Grade, a.section as Section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person;';
 		$query = $this->db->query($sql);
-		//echo $sql;
 		$data = $query->result();
-		/*foreach ($data as $row) {
-			echo $row->p.name;
-			echo $row->p.lastname;
-			echo $row->a.grade;
-			echo $row->a.section;
-			
-		}*/
-		return $query->result();
+		return $data;
+	}
+	
+	function listarAlumnosGrado($pAno,$pSeccion){
+		//$sql = 'SELECT concat(p.name," " ,p.lastname) as Alumno, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
+		$sql = 'SELECT a.id_alumn, concat(p.name," " ,p.lastname) as Alumno, a.grade as Grade, a.section as Section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'" ;';
+		echo '<script>alert("'.$sql.'")</script>';
+		$query = $this->db->query($sql);
+		$data = $query->result();
+		return $data;
 	}
 	
   	function consultarAlumnos($parametro,$tipo,$inicio,$tamanio,$sEcho)
@@ -83,38 +85,48 @@ class abm_alumno_model extends CI_Model {
 		$this->load->model("abm/abm_user_model");
 		$this->abm_user_model->registrarUsuario($pCorreo,'alum');
 		$this->db->trans_begin();
-		$dataPersona = array(
-				"name"		=> $pNombres,
-				"lastname" 	=> $pApellidos,
-				"address" 	=> $pDireccion,
-				"phone"		=> $pTelefono,
-				"cellphone"	=> $pCelular,
-				"dni"		=> $pDni,
-				"sex"		=> $pSexo,
-				"e-mail" 	=> $pCorreo,
-				"born"		=> $pNacimiento
+			$dataPersona = array(
+					"name"		=> $pNombres,
+					"lastname" 	=> $pApellidos,
+					"address" 	=> $pDireccion,
+					"phone"		=> $pTelefono,
+					"cellphone"	=> $pCelular,
+					"dni"		=> $pDni,
+					"sex"		=> $pSexo,
+					"e-mail" 	=> $pCorreo,
+					"born"		=> $pNacimiento
+				);
+			$this->db->insert('tbl_person', $dataPersona); 
+			$IdPersona = $this->db->insert_id();
+			$dataAlumno = array(			
+					 "id_person"=>$IdPersona,   
+				     "grade"=>$pAno,
+				     "condition"=>"H"
+				);
+			$this->db->insert('tbl_alumn', $dataAlumno); 
 			);
-		$this->db->insert('tbl_person', $dataPersona); 
-		$IdPersona = $this->db->insert_id();
-		$dataAlumno = array(			
-				 "id_person"=>$IdPersona,   
-			     "grade"=>$pAno,
-			     "section"=>$pSeccion,
-			     "condition"=>"H"
-			);
-		$this->db->insert('tbl_alumn', $dataAlumno); 
 		$this->db->trans_complete();
 		$data=null;
 		if ($this->db->trans_status() === FALSE)
 		{
 		    $this->db->trans_rollback();
-		    $data=array("tipoMensaje"=>"E","mensaje"=>"No se pudo registrar");
+		    $data="Error! No se pudo registrar.";
 		}
 		else
 		{
 		    $this->db->trans_commit();
-		    $data=array("tipoMensaje"=>"S","mensaje"=>"El registro del beneficiado");
+		    $data="Correcto! Los datos se cargaron correctamente.";
 		}
+	
+	/*	$queryUser = $this->db->query('SELECT email, password FROM tbl_users  ORDER BY id_user DESC;');
+		$result = $queryUser->result();
+		$this->load->library('email');
+		$this->email->from('intranet@institutosantarosa.com', 'IETI Santa Rosa');
+		$this->email->to($pCorreo); 
+		$this->email->subject('Nuevo usuario registrado!');
+		$this->email->message('Su cuenta ha sido correctamente habilitada, sus datos son : <br /> Usuario: '.$result[0]->email.' - Contraseña: '.$result[0]->password);	
+		$this->email->send();
+	*/			
 		return $data;
 	}
 

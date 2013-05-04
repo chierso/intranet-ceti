@@ -25,20 +25,35 @@ class Achademyc_model extends CI_Model
 		return $query->result();
    }
    
-   public function holi(){
-   	$this->db->select('DNI,concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres) as NombresCompletos,NombreCarreraProfesional,NumCiclo,CondicionFinal ',false);			
-	    	$this->db->from('beneficiado');
-			$this->db->join('persona','beneficiado.IdPersona=persona.IdPersona');
-			$this->db->join('carrera_profesional','persona.IdCarreraProfesional = carrera_profesional.IdCarreraProfesional');		
-			$this->db->limit($tamanio,$inicio);
-    		if($tipo==1)
-			{
-    		$this->db->like('DNI',$parametro,'after');
-			}
-			else 
-			{
-			$this->db->like('concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres)',$parametro,'after');
+   public function listarTutoria(){
+   		$query = $this->db->query('SELECT d.id_docente as ID, concat(p.name, " ", p.lastname) as Docente, t.salon as Salon, t.year as Ano FROM (tbl_docente d, tbl_asignacion_tutoria t, tbl_person p) WHERE d.id_person=p.id_person AND d.id_docente = t.id_docente ;');
+   		return $query->result();
    }
-   }
+   
+   function asignar_tutoria($pIdDocente, $pAno, $pSeccion)
+	{
+		$salon = $pAno."-".$pSeccion;
+		$year = $this->session->userdata("Year");
+		$this->db->trans_begin();
+			$dataTutoria = array(
+					"id_docente"	=> $pIdDocente,
+					"salon" 		=> $salon,
+					"year" 			=> $year
+				);
+			$this->db->insert('tbl_asignacion_tutoria', $dataTutoria); 
+		$this->db->trans_complete();
+		$data=null;
+		if ($this->db->trans_status() === FALSE)
+		{
+		    $this->db->trans_rollback();
+		    $data=array("tipoMensaje"=>"E","mensaje"=>"No se pudo registrar");
+		}
+		else
+		{
+		    $this->db->trans_commit();
+		    $data=array("tipoMensaje"=>"S","mensaje"=>"El registro del beneficiado");
+		}
+		return $data;
+	}
 }
 ?>

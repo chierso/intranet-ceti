@@ -95,6 +95,18 @@
 			$this->load->view('abm/abm_subject',$output);
 	}
 	
+	public function abm_asignacion()
+	{
+			$this->load->model("achademyc_model");
+			$data['docentes'] = $this->achademyc_model->listarDocentes();
+			$data['tutoria'] = $this->achademyc_model->listarTutoria();
+			$this->load->view('abm/abm_asignacion',$data);
+	}
+	
+	public function abm_alumno()
+	{
+			redirect('abm/abm_alumno', 'refresh');
+	}
 }
 
 /* End of file welcome.php */
