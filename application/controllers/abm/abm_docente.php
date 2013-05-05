@@ -12,7 +12,7 @@
 		
 	}
 		
-	public function registrarDocente()
+	public function registrar_docente()
 	{		
 		$persona		=	$this->input->post('tipo_persona',TRUE)."";
 		$nombres		=	$this->input->post('txt_nombres',TRUE)."";
@@ -25,7 +25,7 @@
 		$nacimiento		=	$this->input->post('txt_fec_nacimiento',TRUE)."";
 		$correo			=	$this->input->post('txt_email',TRUE)."";
 	    $this->load->model("abm/abm_docente_model");
-	    $data=$this->abm_docente_model->registrarDocente($nombres, 
+	    $data=$this->abm_docente_model->insertar_docente($nombres, 
 											    $apellidos, 
 											    $direccion, 
 											    $dni, 
@@ -35,6 +35,9 @@
 											    $nacimiento, 
 											    $correo
 	    	);
-	    $this->output->set_content_type('json')->set_output(json_encode($data));	
+	    $datos['title']= $data;
+		$datos['vista']='<h2>'.$data.'</h2><br /><a class="btn btn-info" href="javascript:history.back(1)">Regresar</a>';
+		$this->load->view('template/layout',$datos);
+	    //$this->output->set_content_type('json')->set_output(json_encode($data));	
 	}
 }

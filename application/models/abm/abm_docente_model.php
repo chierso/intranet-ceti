@@ -13,7 +13,7 @@ class abm_docente_model extends CI_Model {
 		return $query->result();
 	}
 	
-	function registrarDocente($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo)
+	function insertar_docente($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo)
 	{
 		$this->load->model("abm/abm_user_model");
 		$this->abm_user_model->registrarUsuario($pCorreo,'doc');

@@ -131,12 +131,12 @@ class Acl
 			//$pK = strtolower($this->getClavePermisoPorId($row->id_permission));
 			$pK = ($this->getClavePermisoPorId($row->id_permission));
 			if ($pK == '') { continue; }
-			if ($row->valor === '1') {
+			/*if ($row->valor === '1') {
 				$hP = TRUE;
 			} else {
 				$hP = FALSE;
-			}
-			$permisos[$pK] = array('ClavePermiso' => $pK,'inheritted' => true,'Valor' => $hP,'NombrePermiso' => $this->getNombrePermisoPorId($row->id_permission),'IdPermiso' => $row->id_permission);
+			}*/
+			$permisos[$pK] = array('ClavePermiso' => $pK,'inheritted' => true,/*'Valor' => $hP,*/'NombrePermiso' => $this->getNombrePermisoPorId($row->id_permission),'IdPermiso' => $row->id_permission);
 		}
 		return ($permisos);
 	}

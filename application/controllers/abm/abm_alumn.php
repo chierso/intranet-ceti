@@ -9,10 +9,21 @@
 	
 	public function index()
 	{
+		$pAno = 
+		$this->load->model("abm/abm_alumno_model");
+		$data['alumnos'] = $this->abm_alumno_model->listarAlumnos();
+		$this->load->view('abm/abm_alumno',$data);
+	}
+	
+	public function salon($pAno, $pSeccion)
+	{
 		
+		$this->load->model("abm/abm_alumno_model");
+		$data['alumnos'] = $this->abm_alumno_model->listarAlumnosGrado($pAno,$pSeccion);
+		$this->load->view('abm/abm_alumno',$data);
 	}
 		
-	public function registrarAlumno()
+	public function registrar_alumn()
 	{		
 		$persona		=	$this->input->post('tipo_persona',TRUE)."";
 		$nombres		=	$this->input->post('txt_nombres',TRUE)."";
@@ -27,7 +38,7 @@
 		$grado			=	$this->input->post('cbx_grado',TRUE)."";
 		$seccion		=	$this->input->post('rbt_seccion',TRUE)."";
 	    $this->load->model("abm/abm_alumno_model");
-	    $data=$this->abm_alumno_model->registrarAlumno($nombres, 
+	    $data=$this->abm_alumno_model->insertar_alumn($nombres, 
 											    $apellidos, 
 											    $direccion, 
 											    $dni, 
@@ -39,6 +50,8 @@
 											    $grado, 
 											    $seccion
 	    	);
-	    $this->output->set_content_type('json')->set_output(json_encode($data));	
+		$datos['title']= $data;
+		$datos['vista']='<h2>'.$data.'</h2><br /><a class="btn btn-info" href="javascript:history.back(1)">Regresar</a>';
+		$this->load->view('template/layout',$datos);	
 	}
 }

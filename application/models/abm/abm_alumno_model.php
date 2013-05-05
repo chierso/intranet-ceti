@@ -80,7 +80,7 @@ class abm_alumno_model extends CI_Model {
 		}
 		return $output ;
     }
-	function registrarAlumno($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion)
+	function insertar_alumn($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion)
 	{
 		$this->load->model("abm/abm_user_model");
 		$this->abm_user_model->registrarUsuario($pCorreo,'alum');
@@ -131,41 +131,6 @@ class abm_alumno_model extends CI_Model {
 	}
 
 	
-	function exportarBeneficiados($parametro,$tipo)
-    {
-	    	$this->db->select('DNI,NombresCompletos,NombreCarreraProfesional,NumCiclo,CondicionFinal');				
-	    	$this->db->from('beneficiado');
-			$this->db->join('carrera_profesional','beneficiado.IdCarreraProfesional = carrera_profesional.IdCarreraProfesional');
-    		if($tipo==1)
-			{
-    		$this->db->like('DNI',$parametro,'after');
-			}
-			else 
-			{
-			$this->db->like('NombresCompletos',$parametro,'after');
-			}
-			$sqlBeneficiado= $this->db->get();
-		    $dataBeneficiado = $sqlBeneficiado->result();
-			$rowcount = $sqlBeneficiado->num_rows();
-			$lista_coincidencias=array();
-			$output=null;
-			if($sqlBeneficiado->num_rows()!=0)
-			{
-						$indice = 0;
-						foreach ($dataBeneficiado as $value) 
-						{
-							$lista_coincidencias[$indice]['dni']=$value->DNI;
-							$lista_coincidencias[$indice]['nombrescompletos']=$value->NombresCompletos;
-							$lista_coincidencias[$indice]['nombrecarreraprofesional']=$value->NombreCarreraProfesional;
-							$lista_coincidencias[$indice]['numciclo']=$value->NumCiclo;
-							$lista_coincidencias[$indice]['condicionfinal']=$value->CondicionFinal;
-							$indice++;
-						}			
-				$output = $lista_coincidencias;
-				
-			}
-			return $output ;
-    }
 }
 ?>
 

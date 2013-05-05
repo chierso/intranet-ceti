@@ -29,66 +29,31 @@
 			$this->load->view('template/layout',$data);
 	}
 	
-	public function addAlumn()
+	public function add_alumn()
 	{
 			$data['title'] = "Agregar Alumno - Intranet Académica";
-			$data['content'] = "addAlumn"; 
+			$data['content'] = "add_alumn"; 
 			$data['h1'] = "Registro de nuevo alumno";
 			$this->load->view('template/layout',$data);
 	}
-	
-	public function asignarAlumn()
-	{
-			$data['title'] = "Agregar Alumno - Intranet Académica";
-			$data['content'] = "addAlumno"; 
-			$this->load->view('template/layout',$data);
-	}
-
-	public function editAlumn()
-	{
-			$data['title'] = "Agregar Alumno - Intranet Académica";
-			$data['content'] = "addAlumno"; 
-			$this->load->view('template/layout',$data);
-	}
-	
-	public function elimAlumn()
-	{
-			$data['title'] = "Agregar Alumno - Intranet Académica";
-			$data['content'] = "addAlumno"; 
-			$this->load->view('template/layout',$data);
-	}
-	
-   	public function addDocente()
+		
+   	public function add_docente()
 	{
 			$data['title'] = "Agregar Docente - Intranet Académica";
-			$data['content'] = "addDocente";
+			$data['content'] = "add_docente";
 			$data['h1'] = "Registro de nuevo docente";
 			$this->load->view('template/layout',$data);
 	}
 	
-	public function asignarDocente()
+	public function asignar_docente()
 	{
 			$data['title'] = "Asignar Docente - Intranet Académica";
-			$data['content'] = "asignarDocente";
+			$data['content'] = "asignar_docente";
 			$data['h1'] = "Asignar Docente a Curso"; 
 			$this->load->view('template/layout',$data);
 	}
 
-	public function editDocente()
-	{
-			$data['title'] = "Agregar Docenteo - Intranet Académica";
-			$data['content'] = "addDocenteo"; 
-			$this->load->view('template/layout',$data);
-	}
-	
-	public function elimDocente()
-	{
-			$data['title'] = "Agregar Docenteo - Intranet Académica";
-			$data['content'] = "addDocenteo"; 
-			$this->load->view('template/layout',$data);
-	}
-
-	public function gestionCurso()
+	public function gestion_curso()
 	{
 			$this->grocery_crud->set_table('tbl_subject');
 			$output = $this->grocery_crud->render();
@@ -105,7 +70,7 @@
 	
 	public function abm_alumno()
 	{
-			redirect('abm/abm_alumno', 'refresh');
+			redirect('abm/abm_alumn', 'refresh');
 	}
 }
 

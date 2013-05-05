@@ -1,8 +1,8 @@
 	<?php
 		$this->load->helper("form");
-		echo form_open("abm/registro/registrarDocente");
+		echo form_open("abm/abm_alumn/registrar_alumn");
 	?>
-	
+	<input type="hidden" name="tipo_persona" value="alumn" />
 	<div class="row-fluid">
 		<div class="span6">
 			<label for="Nombres">Nombres</label>
@@ -57,11 +57,35 @@
 				</div>
 			</div>
 		</div>
+		<hr />
+		<div class="row-fluid">
+			<div class="span6">
+				<label for="grade">Grado: </label>
+				<select id="grade" name="cbx_grado">
+					<option value="1">1 º</option>
+					<option value="2">2 º</option>
+					<option value="3">3 º</option>
+					<option value="4">4 º</option>
+					<option value="5">5 º</option>	
+				</select>
+			</div>
+			<div class="span6">
+				<label>Sección: </label>
+				<label class="radio inline"> 
+			  		<input type="radio" name="rbt_seccion" value="A">A
+				</label>
+				<label class="radio inline"> 
+			  		<input type="radio" name="rbt_seccion" value="B">B
+				</label>
+				<label class="radio inline"> 
+					<input type="radio" name="rbt_seccion" value="C">C
+				</label>
+			</div>
 	</div>
 	<button class="btn btn-success" type="submit">Agregar</button>
 	<button class="btn" type="reset">Cancelar</button>
 	<?php
 		echo form_close();
 	?>
-<script src="<?php echo base_url("public/js/bootstrap-datepicker.js")?>" ="utf-8"></script>
-<script src="<?php echo base_url("public/js/utility.js")?>" ="utf-8"></script>
+<script src="<?php echo base_url("public/js/bootstrap-datepicker.js")?>"></script>
+<script src="<?php echo base_url("public/js/utility.js")?>"></script>
