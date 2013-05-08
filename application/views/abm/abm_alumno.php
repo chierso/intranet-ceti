@@ -28,6 +28,44 @@
 		</div>
 		<div class="row-fluid">
 		<div class="span12">
+			<div class="span6">
+				<form method="post">
+					<div class="span3">
+						<label for="grade">Grado: </label>
+						<select class="input-small" id="grade" name="cbx_grado">
+							<option value="1">1 º</option>
+							<option value="2">2 º</option>
+							<option value="3">3 º</option>
+							<option value="4">4 º</option>
+							<option value="5">5 º</option>	
+						</select>
+					</div>
+					<div class="span4">
+						<label>Sección: </label>
+						<label class="radio inline"> 
+					  		<input type="radio" name="rbt_seccion" value="A">A
+						</label>
+						<label class="radio inline"> 
+					  		<input type="radio" name="rbt_seccion" value="B">B
+						</label>
+						<label class="radio inline"> 
+							<input type="radio" name="rbt_seccion" value="C">C
+						</label>
+					</div>
+					<div class="span4">
+						<br />
+						<button class="btn btn-info" style="vertical-align: bottom;" type="submit">Filtrar</button>
+					</div>
+				</form>
+			</div>
+			<div class="span6">
+				<form id="buscador">
+				<label for="Buscador">Buscador: </label>
+				<input type="text" id="Buscador" name="txt_search" class="span9" required="required" placeholder="EJ. Carlos" />
+				</form>
+			</div>
+			<hr />
+			<div id="results">
 			<table class="table">
 			<thead>
                 <tr>
@@ -48,13 +86,13 @@
 					echo '<td>
 							<a data-id="'.$row->id_alumn.'" role="button" href="#modalAdd" class="btn btn-warning btn-mini"><i class="icon-white icon-edit"></i></a>
 							<a data-id="'.$row->id_alumn.'" role="button" data-togle="modal" class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i></a>
-						  </td></tr>';
-					
+						  </td></tr>';	
 				}
 			 ?>
 			 </tbody>
 			 </table>
-			 <!-- TABLA ASIGNADOS --> 
+			 <!-- TABLA ASIGNADOS -->
+			 </div> 
 		</div>
 			<?php echo $this->load->view('template/_footer') ?> 
    		</div>

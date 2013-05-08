@@ -4,6 +4,7 @@
 	public function __construct()
       {
          parent::__construct();
+		  $this->control_session->verifyLoginOnHome();
 		 $this->load->library('grocery_CRUD');
       }
 	

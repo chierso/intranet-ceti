@@ -4,14 +4,16 @@
 	public function __construct()
       {
          parent::__construct();
+		  $this->control_session->verifyLoginOnHome();
 		 $this->load->library('grocery_CRUD');
       }
 	
 	public function index()
 	{
-		$pAno = 
+		$pAno=$this->input->post('cbx_grado',TRUE)."";
+		$pSeccion=$this->input->post('rbt_seccion',TRUE)."";
 		$this->load->model("abm/abm_alumno_model");
-		$data['alumnos'] = $this->abm_alumno_model->listarAlumnos();
+		$data['alumnos'] = $this->abm_alumno_model->listarAlumnos($pAno,$pSeccion);
 		$this->load->view('abm/abm_alumno',$data);
 	}
 	
@@ -53,5 +55,12 @@
 		$datos['title']= $data;
 		$datos['vista']='<h2>'.$data.'</h2><br /><a class="btn btn-info" href="javascript:history.back(1)">Regresar</a>';
 		$this->load->view('template/layout',$datos);	
+	}
+
+	public function buscar_alumn(){
+		$pAlumno=$this->input->post('txt_search',TRUE)."";
+		$this->load->model("abm/abm_alumno_model");
+		$data = $this->abm_alumno_model->listarAlumnos($pAno,$pSeccion);
+		$this->output->set_content_type('json')->set_output(json_encode($data));
 	}
 }

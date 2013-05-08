@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="<?php echo base_url("public/css/bootstrap.min.css")?>">
 	<link rel="stylesheet" href="<?php echo base_url("public/css/datepicker.css")?>">
 	<link rel="stylesheet" href="<?php echo base_url("public/css/style.css")?>">    
+	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head> 
 <body> 

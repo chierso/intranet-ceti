@@ -4,6 +4,7 @@
 	public function __construct()
       {
          parent::__construct();
+		  $this->control_session->verifyLoginOnHome();
 		 $this->load->library('grocery_CRUD');
       }
 	
@@ -16,12 +17,7 @@
 	{
 		//$this->grocery_crud->set_theme('twitter-bootstrap');
 		//$this->grocery_crud->set_theme('datatables');
-		$this->grocery_crud->set_table('tbl_subject_registration');
-		$this->grocery_crud->display_as('id_subject','Curso');
-		$this->grocery_crud->set_subject('Curso');
-		$this->grocery_crud->add_fields('id_subject','year_section');
-		$this->grocery_crud->field_type('id_subject', 'multiselect');
-		$this->grocery_crud->set_relation('id_subject','tbl_subject','name');
+		$this->grocery_crud->set_table('tbl_subject');
 		$output = $this->grocery_crud->render();
 		$this->_example_output($output);
 	}

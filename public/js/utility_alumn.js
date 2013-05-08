@@ -1,10 +1,7 @@
 $(document).on("ready", init);
-
 var server="http://localhost:81/intranet-ceti/";
 var id;
 var nombre;
-
-
 function init(){
 	$('.btn-success').on('click',agregar);	
 	$('#frm_add').on('submit',function (ev){

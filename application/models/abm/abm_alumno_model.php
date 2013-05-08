@@ -6,80 +6,28 @@ class abm_alumno_model extends CI_Model {
         parent::__construct();
     }   
 	
-	function listarAlumnos(){
+	function listarAlumnos($pAno,$pSeccion){
 		//$sql = 'SELECT concat(p.name," " ,p.lastname) as Alumno, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
-		$sql = 'SELECT a.id_alumn, concat(p.name," " ,p.lastname) as Alumno, a.grade as Grade, a.section as Section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person;';
+		$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%'.$pAno.'%" AND r.section LIKE "%'.$pSeccion.'%" ;';
 		$query = $this->db->query($sql);
 		$data = $query->result();
 		return $data;
 	}
 	
-	function listarAlumnosGrado($pAno,$pSeccion){
-		//$sql = 'SELECT concat(p.name," " ,p.lastname) as Alumno, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
-		$sql = 'SELECT a.id_alumn, concat(p.name," " ,p.lastname) as Alumno, a.grade as Grade, a.section as Section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'" ;';
-		echo '<script>alert("'.$sql.'")</script>';
-		$query = $this->db->query($sql);
-		$data = $query->result();
-		return $data;
-	}
-	
-  	function consultarAlumnos($parametro,$tipo,$inicio,$tamanio,$sEcho)
-    {
 
-	    $this->db->select('DNI,concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres) as NombresCompletos,NombreCarreraProfesional,NumCiclo,CondicionFinal ',false);			
-	    $this->db->from('beneficiado');
-		$this->db->join('persona','beneficiado.IdPersona=persona.IdPersona');
-		$this->db->join('carrera_profesional','persona.IdCarreraProfesional = carrera_profesional.IdCarreraProfesional');		
-		$this->db->limit($tamanio,$inicio);
-    	if($tipo==1)
-		{
-	    	$this->db->like('DNI',$parametro,'after');
-		}
-		else 
-		{
-			$this->db->like('concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres)',$parametro,'after');
-		}			
-		$sqlBeneficiado= $this->db->get();
-		   $dataBeneficiado = $sqlBeneficiado->result();
-		$rowcount = $sqlBeneficiado->num_rows();
-		$lista_coincidencias=array();
-		
-		$ouput=null;
-		$output = array(
-					"sEcho" => intval($sEcho),
-					"iTotalRecords" => 0,
-					"iTotalDisplayRecords" => 0,
-					"aaData" => array()
-				);
-		if($sqlBeneficiado->num_rows()!=0)
-		{
-					
-			foreach ($dataBeneficiado as $value) 
-			{
-				$lista_coincidencias[]=$value;
-			}			
-			$this->db->select('count(*) as total');		
-	    	$this->db->from('beneficiado');
-			$this->db->join('persona','beneficiado.IdPersona=persona.IdPersona');
-			if($tipo==1)
-			{
-    			$this->db->like('concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres)',$parametro,'after');
-			}
-			else 
-			{
-				$this->db->like('concat(ApellidoPaterno," ",ApellidoMaterno," ",Nombres)',$parametro,'after');
-			}
-			$sqlTotal= $this->db->get();
-		    $dataTotal = $sqlTotal->result();
-			$output = array(
-				"sEcho" => intval($sEcho),
-				"iTotalRecords" => $rowcount,
-				"iTotalDisplayRecords" => $dataTotal[0]->total,
-				"aaData" => $lista_coincidencias
-			);
-		}
-		return $output ;
-    }
+	function buscarAlumno($pAlumno){
+		//$sql = 'SELECT concat(p.name," " ,p.lastname) as Alumno, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
+		$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%'.$pAno.'%" AND r.section LIKE "%'.$pSeccion.'%" ;';
+		$this->db->select('a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section');
+		$this->db->from('tbl_person AS p, tbl_alumn AS a, tbl_registration AS r');
+		$this->db->where('a.id_person = p.id_person AND r.id_alumn = a.id_alumn');
+		$this->db->like('concat(p.name, " ", p.lastname)',$pAlumno,'both');
+		$query = $this->db->query($sql);
+		$data = $query->result();
+		return data;
+	
+	}
+	
 	function insertar_alumn($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion)
 	{
 		$this->load->model("abm/abm_user_model");
@@ -100,11 +48,17 @@ class abm_alumno_model extends CI_Model {
 			$IdPersona = $this->db->insert_id();
 			$dataAlumno = array(			
 					 "id_person"=>$IdPersona,   
-				     "grade"=>$pAno,
 				     "condition"=>"H"
 				);
 			$this->db->insert('tbl_alumn', $dataAlumno); 
-			
+			$IdAlumno = $this->db->insert_id();
+			$dataRegistration = array(
+					"id_alumn"	=>	$IdAlumno,
+			     	"grade"		=>	$pAno,
+			     	"section"	=>  $pSeccion,
+					"year"		=> 	date('Y')
+			);
+			$this->db->insert('tbl_registration', $dataRegistration); 
 		$this->db->trans_complete();
 		$data=null;
 		if ($this->db->trans_status() === FALSE)
