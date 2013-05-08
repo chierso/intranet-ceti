@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Asignación de Tutoría</title>
+	<title>ABM Alumno - Intranet IETI Santa Rosa de Lima</title>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<link rel="stylesheet" href="<?php echo base_url("public/css/bootstrap.min.css")?>">
@@ -76,7 +76,7 @@
                   <th>Acción</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tbody">
 			<?php 
 				foreach($alumnos as $row){
 					echo '<tr><td>'.$row->id_alumn.'</td>';
