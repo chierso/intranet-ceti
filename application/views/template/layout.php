@@ -15,7 +15,6 @@
 	<link rel="stylesheet" href="<?php echo base_url("public/css/jquery.dataTables.css")?>">    
 	<link rel="stylesheet" href="<?php echo base_url("public/css/jquery.dataTables_themeroller.css")?>">
 	<link rel="stylesheet" href="<?php echo base_url("public/css/jquery/jquery-ui-1.8.23.custom.css")?>">
-	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head> 
 <body> 
@@ -24,7 +23,6 @@
 		<div class="navbar navbar-inverse">
 		  <div class="navbar-inner">
 		    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
