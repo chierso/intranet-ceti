@@ -58,9 +58,11 @@
 	}
 
 	public function buscar_alumn(){
+		$pAno=$this->input->post('cbx_grado',TRUE)."";
+		$pSeccion=$this->input->post('rbt_seccion',TRUE)."";
 		$pAlumno=$this->input->post('txt_search',TRUE)."";
 		$this->load->model("abm/abm_alumno_model");
-		$data = $this->abm_alumno_model->listarAlumnos($pAno,$pSeccion);
+		$data = $this->abm_alumno_model->buscarAlumno($pAlumno,$pAno,$pSeccion);
 		$this->output->set_content_type('json')->set_output(json_encode($data));
 	}
 }

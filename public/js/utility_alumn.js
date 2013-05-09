@@ -3,15 +3,14 @@ var server="http://localhost:81/intranet-ceti/";
 var jsonAlumno;
 var alumno;
 
-function init(){
-	$('.btn-success').on('click',agregar);	
-	$('#frm_add').on('submit',function (ev){
+function init(){	
+	$('#buscador').on('submit',function (ev){
 		ev.preventDefault();
 		dataString = $(this).serialize();
 		//alert(dataString);
 		$.ajax({
 		  type: "POST",
-		  url: server+'/abm/abm_alumn/buscar_alumn',
+		  url: server+'abm/abm_alumn/buscar_alumn',
 		  data: dataString,
 		  success: function(alumnos)
 		  {
@@ -20,24 +19,21 @@ function init(){
 		    {
 		        alumno = alumnos[incremento];
 		        $('#tbody').append(
-		            "<tr>"
-		            +"<td class='id'>" + alumno.id + 
-		            "</td><td class='nombre'>" + alumno.nombre + 
-		            "</td><td class='numerico'>" + alumno.edad + 
-		            "</td><td class='numerico'>" + alumno.grado + 
-		            "</td>"
-		            +"</tr>"); 
+		            '<tr>'
+		            +'<td>' + (incremento+1) + 
+		            '</td><td>' + alumno.fullname + 
+		            '</td><td>' + alumno.grade + 
+		            '</td><td>' + alumno.section + 
+		            '</td><td>' + 
+		            '<a data-id="'+alumno.id+'" role="button" href="#modalAdd" class="btn btn-warning btn-mini"><i class="icon-white icon-edit"></i></a>'+
+					' <a data-id="'+alumno.id+'" role="button" data-togle="modal" class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i></a>'
+		            + '</td></tr>'); 
+		        
 		    }
-			jsonAlumno=json;		  	
+		    $('input:radio').prop('checked', false);
+				  	
 		  }
 		});
 		return false;	
 	});
-}
-
-function agregar() {
-    id=$(this).attr('data-id');
-    nombre=$(this).attr('data-docente');
-    $('#pDocente').html(''+nombre);
-    $('#id_docente').val(''+id);
 }

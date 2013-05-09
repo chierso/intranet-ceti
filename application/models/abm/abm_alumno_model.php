@@ -15,15 +15,17 @@ class abm_alumno_model extends CI_Model {
 	}
 	
 
-	function buscarAlumno($pAlumno){
+	function buscarAlumno($pAlumno,$pAno,$pSeccion){
 		//$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%'.$pAno.'%" AND r.section LIKE "%'.$pSeccion.'%" ;';
-		$this->db->select('a.id_alumn AS id , concat(p.name, " ", p.lastname) AS fullname, r.grade AS grade, r.section as section');
+		$this->db->select('a.id_alumn AS id , concat(p.name, " ", p.lastname) AS fullname, r.grade AS grade, r.section as section',false);
 		$this->db->from('tbl_person AS p, tbl_alumn AS a, tbl_registration AS r');
 		$this->db->where('a.id_person = p.id_person AND r.id_alumn = a.id_alumn');
-		$this->db->like('concat(p.name, " ", p.lastname)',$pAlumno,'both');
+		$this->db->like('concat(p.name," ",p.lastname)',$pAlumno,'both');
+		$this->db->like('r.grade',$pAno,'both');
+		$this->db->like('r.section',$pSeccion,'both');
 		$query = $this->db->get();
-		$data = $query->result();
-		return $data;
+		return $query->result();
+		
 	}
 	
 	function insertar_alumn($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion)

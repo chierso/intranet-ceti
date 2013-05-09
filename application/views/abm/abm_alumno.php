@@ -28,9 +28,13 @@
 		</div>
 		<div class="row-fluid">
 		<div class="span12">
-			<div class="span6">
-				<form method="post">
-					<div class="span3">
+			<div class="span12">
+				<form method="post" id="buscador">
+					<div class="span4">
+						<label for="Buscador">Buscador: </label>
+						<input type="text" id="Buscador" name="txt_search" class="span9" placeholder="EJ. Carlos" />
+					</div>
+					<div class="span2">
 						<label for="grade">Grado: </label>
 						<select class="input-small" id="grade" name="cbx_grado">
 							<option value="1">1 º</option>
@@ -40,7 +44,7 @@
 							<option value="5">5 º</option>	
 						</select>
 					</div>
-					<div class="span4">
+					<div class="span2">
 						<label>Sección: </label>
 						<label class="radio inline"> 
 					  		<input type="radio" name="rbt_seccion" value="A">A
@@ -58,12 +62,6 @@
 					</div>
 				</form>
 			</div>
-			<div class="span6">
-				<form id="buscador">
-				<label for="Buscador">Buscador: </label>
-				<input type="text" id="Buscador" name="txt_search" class="span9" required="required" placeholder="EJ. Carlos" />
-				</form>
-			</div>
 			<hr />
 			<div id="results">
 			<table class="table">
@@ -77,9 +75,9 @@
                 </tr>
             </thead>
             <tbody id="tbody">
-			<?php 
+			<?php $cont = 1;
 				foreach($alumnos as $row){
-					echo '<tr><td>'.$row->id_alumn.'</td>';
+					echo '<tr><td>'.$cont.'</td>';$cont++;
 					echo '<td>'.$row->Alumno.'</td>';
 					echo '<td>'.$row->Grade.'</td>';
 					echo '<td>'.$row->Section.'</td>';
@@ -99,7 +97,7 @@
     </div> <!-- /container -->   
     <script src="<?php echo base_url("public/js/bootstrap.min.js")?>"></script>
     <!--<script src="<?php echo base_url("public/js/bootstrap-dropdown.js")?>"></script>-->
-    <script src="<?php echo base_url("public/js/utility_asignacion.js")?>"></script>
+    <script src="<?php echo base_url("public/js/utility_alumn.js")?>"></script>
     <!--<script src="<?php echo base_url("public/js/bootstrap-modal.js")?>"></script>-->
 </body>
 </html>
