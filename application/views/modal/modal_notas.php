@@ -5,14 +5,12 @@
     </div>
     <div class="modal-body">
       <p>
-      	Alumno: <span id="pAlumno"></span>
-          <hr />  
         <form method="post" id="frm_notas">
           <input type="hidden" name="id_alumno" id="id_alumno" value="0" />
-          <table class="table table-striped">
+          <table class="table table-condensed table-bordered">
 			<thead>
 			<tr align="center">
-			<th rowspan="2"></th>
+			<th rowspan="2">Alumno: <span id="pAlumno"></span></th>
 			<th colspan="4">BIMESTRES</th>
 			</tr>
 			<tr>
@@ -23,13 +21,15 @@
 			</tr>
 			</thead>
 			<tbody>
-			<?php foreach($cursos as $row){
-			echo '<tr>'+
-			'<td>'.$row->name.'</td>'+
-			'<td>0</td>'+
-			'<td>0</td>'+
-			'<td>0</td>'+
-			'<td>0</td>'+
+				<tr></tr>
+			<?php 
+			foreach($cursos as $row){
+			echo '<tr>'.
+			'<td>'.$row->name.'</td>'.
+			'<td><input name="'.$row->id_subject.'[]" data-bimester="I" type="number" min="0" max="20" class="span1" /></td>'.
+			'<td><input name="'.$row->id_subject.'[]" data-bimester="II" type="number" min="0" max="20" class="span1" /></td>'.
+			'<td><input name="'.$row->id_subject.'[]" data-bimester="III" type="number" min="0" max="20" class="span1" /></td>'.
+			'<td><input name="'.$row->id_subject.'[]" data-bimester="IV" type="number" min="0" max="20" class="span1" /></td>'.
 			'</tr>';
 			 } ?>
 			</tbody>

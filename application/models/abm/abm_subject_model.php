@@ -8,12 +8,10 @@ class abm_subject_model extends CI_Model {
 	
 	function listarSubjects()
     {
-			$this->db->select('id_subject, name',false);			
+			$this->db->select('*',false);			
 	    	$this->db->from('tbl_subject');
-			//$this->db->like('name',$parametro,'after');
 			$sqlSubject= $this->db->get();
 		    return $sqlSubject->result();
-			
     }
 }
 ?>

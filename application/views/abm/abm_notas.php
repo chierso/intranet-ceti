@@ -34,6 +34,7 @@
 		</div>
 		<div class="row-fluid">
 		<div class="span12">
+			<div class="row-fluid">
 			<div class="span12">
 				<form method="post" id="buscador">
 					<div class="span4">
@@ -68,6 +69,7 @@
 					</div>
 				</form>
 			</div>
+			</div>
 			<hr />
 			<div id="results">
 			<table class="table">
@@ -88,6 +90,7 @@
 					echo '<td>'.$row->grade.'</td>';
 					echo '<td>'.$row->section.'</td>';
 					echo '<td>
+							<a data-id="'.$row->id.'" class="btn btn-mini" id="test"">As</a>
 							<a data-id="'.$row->id.'" role="button" data-target="#modalNotas	" data-toggle="modal" class="btn btn-warning btn-mini"><i class="icon-white icon-edit"></i></a>
 							<a data-id="'.$row->id.'" role="button" data-target="#modalDel" data-togle="modal" class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i></a>
 						  </td></tr>';	
@@ -99,21 +102,13 @@
 	</div>
 		<?php echo $this->load->view('template/_footer') ?> 
  	</div>
- 		<?php foreach($cursos as $row){
-			echo '<tr>'+
-			'<td>'.$row->name.'</td>'+
-			'<td>0</td>'+
-			'<td>0</td>'+
-			'<td>0</td>'+
-			'<td>0</td>'+
-			'</tr>';
-			 } ?>
+
  		<?php
  			$data['cursos'] = $cursos; 
  			echo $this->load->view('modal/modal_notas',$data);
 		 ?>
     </div> <!-- /container -->   
     <script src="<?php echo base_url("public/js/bootstrap.min.js")?>"></script>
-    <script src="<?php echo base_url("public/js/utility_alumn.js")?>"></script>
+    <script src="<?php echo base_url("public/js/utility_notas.js")?>"></script>
 </body>
 </html>
