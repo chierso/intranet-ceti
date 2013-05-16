@@ -34,12 +34,24 @@
 		</div>
 		<div class="row-fluid">
 		<div class="span12">
-			<div class="row-fluid">
 			<div class="span12">
 				<form method="post" id="buscador">
 					<div class="span4">
-						<label for="Buscador">Buscador: </label>
-						<input type="text" id="Buscador" name="txt_search" class="span9" placeholder="EJ. Carlos" />
+						Bimestre:<br />
+						<label class="radio inline"> 
+					  		<input type="radio" name="rbt_seccion" value="1">I
+						</label>
+						<label class="radio inline"> 
+					  		<input type="radio" name="rbt_seccion" value="2">II
+						</label>
+						<label class="radio inline"> 
+							<input type="radio" name="rbt_seccion" value="3">III
+						</label>
+						<label class="radio inline"> 
+							<input type="radio" name="rbt_seccion" value="4">IV
+						</label>
+						<!--<label for="Buscador">Buscador: </label>
+						<input type="text" id="Buscador" name="txt_search" class="span9" placeholder="EJ. Carlos" />-->
 					</div>
 					<div class="span2">
 						<label for="grade">Grado: </label>
@@ -69,7 +81,6 @@
 					</div>
 				</form>
 			</div>
-			</div>
 			<hr />
 			<div id="results">
 			<table class="table">
@@ -86,13 +97,12 @@
 			<?php $cont = 1;
 				foreach($alumnos as $row){
 					echo '<tr><td>'.$cont.'</td>';$cont++;
-					echo '<td>'.$row->fullname.'</td>';
-					echo '<td>'.$row->grade.'</td>';
-					echo '<td>'.$row->section.'</td>';
+					echo '<td>'.$row->Alumno.'</td>';
+					echo '<td>'.$row->Grade.'</td>';
+					echo '<td>'.$row->Section.'</td>';
 					echo '<td>
-							<a data-id="'.$row->id.'" class="btn btn-mini" id="test"">As</a>
-							<a data-id="'.$row->id.'" role="button" data-target="#modalNotas	" data-toggle="modal" class="btn btn-warning btn-mini"><i class="icon-white icon-edit"></i></a>
-							<a data-id="'.$row->id.'" role="button" data-target="#modalDel" data-togle="modal" class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i></a>
+							<a data-id="'.$row->id_alumn.'" role="button" data-target="#modalEdit" data-toggle="modal" class="btn btn-warning btn-mini"><i class="icon-white icon-edit"></i></a>
+							<a data-id="'.$row->id_alumn.'" role="button" data-target="#modalDel" data-togle="modal" class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i></a>
 						  </td></tr>';	
 				}
 			 ?>
@@ -101,14 +111,60 @@
 			 </div> 
 	</div>
 		<?php echo $this->load->view('template/_footer') ?> 
- 	</div>
-
- 		<?php
- 			$data['cursos'] = $cursos; 
- 			echo $this->load->view('modal/modal_notas',$data);
-		 ?>
+ 		</div>
+<div id="modalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+      <h3 id="myModalLabel">Asignar Tutoría</h3>
+    </div>
+    <div class="modal-body">
+      <p>
+        <form method="post" action="<?php echo base_url("abm/abm_subject/asignar_tutoria")?>" id="frm_add">
+          Docente : <span id="pDocente"></span>
+          <hr />
+          <input type="hidden" name="id_docente" id="id_docente" value="0" />
+          <div class="row-fluid">
+      <div class="span6">
+        <label for="grade">Grado: </label>
+        <select id="grade" name="cbx_grado">
+          <option value="1">1 º</option>
+          <option value="2">2 º</option>
+          <option value="3">3 º</option>
+          <option value="4">4 º</option>
+          <option value="5">5 º</option>  
+        </select>
+      </div>
+      <div class="span6">
+        <label>Sección: </label>
+        <label class="radio inline"> 
+            <input type="radio" name="rbt_seccion" value="A">A
+        </label>
+        <label class="radio inline"> 
+            <input type="radio" name="rbt_seccion" value="B">B
+        </label>
+        <label class="radio inline"> 
+          <input type="radio" name="rbt_seccion" value="C">C
+        </label>
+      </div>
+  </div>
+  <input type="submit" value="add" class="btn" />
+        </form>        
+      </p>
+    </div>
+    <div class="modal-footer">
+      <div class="row-fluid fila_datos">
+        <div class="progress progress-striped span7">
+        <div class="bar"></div>
+      </div>
+      <div>
+        <button type="submit" name="btn_confirmar" class="btn btn-primary">Guardar</button>
+          <button type="button" name="btn_cancelar2" class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+      </div>                
+      </div>          
+    </div>
+</div>
     </div> <!-- /container -->   
     <script src="<?php echo base_url("public/js/bootstrap.min.js")?>"></script>
-    <script src="<?php echo base_url("public/js/utility_notas.js")?>"></script>
+    <script src="<?php echo base_url("public/js/utility_alumn.js")?>"></script>
 </body>
 </html>

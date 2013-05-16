@@ -2,6 +2,7 @@ $(document).on("ready", init);
 var server="http://localhost:81/intranet-ceti/";
 var jsonAlumno;
 var alumno;
+var id;
 
 function init(){	
 	$('#buscador').on('submit',function (ev){
@@ -36,11 +37,15 @@ function init(){
 		});
 		return false;	
 	});
+	
 	$('#test').on('click',function (ev){
 		ev.preventDefault();
-		$('#modalNotas').show('slow');
-		$('#results').hide('slow');
-		
+		id=$(this).attr('data-id');
+		$('#id_alumno').val(''+id);
+		$('#bimester').val(''+id);
+		$('#results').fadeOut('slow',function(){
+			$('#modalNotas').fadeIn('slow');
+		});
 		return false;	
 	});
 }
