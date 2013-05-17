@@ -2,7 +2,6 @@ $(document).on("ready", init);
 var server="http://localhost:81/intranet-ceti/";
 var jsonAlumno;
 var alumno;
-var id;
 
 function init(){	
 	$('#buscador').on('submit',function (ev){
@@ -16,7 +15,6 @@ function init(){
 		  success: function(alumnos)
 		  {
 		  	$('#tbody').html('');
-		  	
 		  	for (var incremento in alumnos)
 		    {
 		        alumno = alumnos[incremento];
@@ -24,25 +22,17 @@ function init(){
 		            '<tr>'
 		            +'<td>' + (incremento+1) + 
 		            '</td><td>' + alumno.fullname + 
-		            '</td>'+
-		            '<td>'+ 
-		            '<input data-id="'+alumno.id+'" name="notas[]" type="text" />'
-		            );    
+		            '</td><td>' + alumno.grade + 
+		            '</td><td>' + alumno.section + 
+		            '</td><td>' + 
+		            '<a data-id="'+alumno.id+'" role="button" href="#modalAdd" class="btn btn-warning btn-mini"><i class="icon-white icon-edit"></i></a>'+
+					' <a data-id="'+alumno.id+'" role="button" data-togle="modal" class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i></a>'
+		            + '</td></tr>'); 
+		        
 		    }
-		    $('#tbody').append('</td></tr><tr><td colspan="4"><input id="submitNotas" type="submit" class="btn btn-success" value="Insertar" /></td></tr>');
 		    $('input:radio').prop('checked', false);
+				  	
 		  }
-		});
-		return false;	
-	});
-	
-	$('#test').on('click',function (ev){
-		ev.preventDefault();
-		id=$(this).attr('data-id');
-		$('#id_alumno').val(''+id);
-		$('#bimester').val(''+id);
-		$('#results').fadeOut('slow',function(){
-			$('#modalNotas').fadeIn('slow');
 		});
 		return false;	
 	});
