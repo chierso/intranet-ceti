@@ -3,12 +3,22 @@ var server="http://localhost:81/intranet-ceti/";
 var jsonAlumno;
 var alumno;
 var id;
+// variables de registro de notas
+var bimester;
+var grade;
+var section;
+var subject;
 
 function init(){	
 	$('#buscador').on('submit',function (ev){
 		ev.preventDefault();
 		dataString = $(this).serialize();
 		//alert(dataString);
+		bimester = $("input[name=rbt_bimester]:checked").val();
+		grade 	 = $("#grade").val();
+		section	 = $("input[name=rbt_section]:checked").val();
+		subject	 = $("#subject").val();
+		
 		$.ajax({
 		  type: "POST",
 		  url: server+'abm/abm_alumn/buscar_alumn',
@@ -16,6 +26,10 @@ function init(){
 		  success: function(alumnos)
 		  {
 		  	$('#tbody').html('');
+		  	$('#iBimester').val(''+bimester);
+		  	$('#iGrade').val(''+grade);
+		  	$('#iSection').val(''+section);
+		  	$('#iSubject').val(''+subject);
 		  	
 		  	for (var incremento in alumnos)
 		    {

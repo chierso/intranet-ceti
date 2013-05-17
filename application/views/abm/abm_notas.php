@@ -67,18 +67,18 @@
 						<div class="span2">
 							<label>Sección: </label>
 							<label class="radio inline"> 
-						  		<input type="radio" name="rbt_seccion" value="A">A
+						  		<input type="radio" name="rbt_section" value="A">A
 							</label>
 							<label class="radio inline"> 
-						  		<input type="radio" name="rbt_seccion" value="B">B
+						  		<input type="radio" name="rbt_section" value="B">B
 							</label>
 							<label class="radio inline"> 
-								<input type="radio" name="rbt_seccion" value="C">C
+								<input type="radio" name="rbt_section" value="C">C
 							</label>
 						</div>
 						<div class="span3">
 							<label>Curso:</label>
-							<select id="grade" name="cbx_subject">
+							<select id="subject" name="cbx_subject">
 								<?php foreach($cursos as $row){
 								echo '<option value="'.$row->id_subject.'">'.$row->name.'</option>';	
 								}?>	
@@ -109,10 +109,10 @@
 	            </thead>
 	                <input type="hidden" id="iBimester" name="bimester" value="" />
 		            <input type="hidden" id="iSubject" name="subject" value="" />
-		            <input type="hidden" id="iGrado" name="grade" value="" />
+		            <input type="hidden" id="iGrade" name="grade" value="" />
 		            <input type="hidden" id="iSection" name="section" value="" />
-		            
 		            <tbody id="tbody">
+		            
 		            </tbody>
 				
 				</table>
