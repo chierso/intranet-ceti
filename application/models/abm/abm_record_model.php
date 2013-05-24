@@ -38,6 +38,38 @@ class abm_record_model extends CI_Model {
 		return $data;
 	}   
 	
+	function verify_registro($pAlumno, $pGrado, $pSeccion, $pCurso, $pBimester){
+		$this->db->trans_begin();
+			// first registration
+			$pBimester = "N".$pBimester;
+			$dataRegistration = array(
+					"id_alumn"	=> $pAlumno,
+					"grade" 	=> $pGrado,
+					"section"	=> $pSeccion,
+					"year"		=> date('Y')
+					);
+			$this->db->insert('tbl_registration', $dataRegistration); 
+			$idRegistration = $this->db->insert_id();
+			$dataRecord = array(			
+					"id_subject"			=> $pCurso,   
+					$pBimester."_average"  	=> $pNota,
+					"id_registration"		=> $idRegistration
+				);
+			$this->db->insert('tbl_record', $dataRecord); 
+		$this->db->trans_complete();
+		if ($this->db->trans_status() === FALSE)
+		{
+		    $this->db->trans_rollback();
+		    $data="No se pudo registrar";
+		}
+		else
+		{
+		    $this->db->trans_commit();
+		    $data="El registro del beneficiado";
+		}
+		return $data;
+	}
+	
 	function listar_notas($pAlumno){
 		$this->db->select('concat(p.lastname, " ", p.name) AS Alumno, r.grade AS Grado, r.section as Seccion, s.name, rc.N1_average, rc.N2_average, rc.N3_average, rc.N4_average',false);
 		$this->db->from('tbl_person AS p, tbl_alumn AS a, tbl_registration AS r, tbl_record AS rc, tbl_subject AS s');

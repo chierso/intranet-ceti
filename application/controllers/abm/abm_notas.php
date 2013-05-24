@@ -22,6 +22,7 @@
 	
 	public function insert()
 	{
+		verifyRegistro();
 		$pBimester	= $this->input->post('bimester',TRUE)."";
 		$pSubject	= $this->input->post('subject',TRUE)."";
 		$pGrado		= $this->input->post('grade',TRUE)."";
