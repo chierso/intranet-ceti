@@ -22,12 +22,20 @@
 	
 	public function insert()
 	{
-		$pBimester	=	$this->input->post('bimester',TRUE)."";
-		$pSubject	=	$this->input->post('subject',TRUE)."";
-		$pGrado		=	$this->input->post('grade',TRUE)."";
-		$pSeccion	=	$this->input->post('seccion',TRUE)."";
-		$pNotas		= 	$this->input->post('notas');
-		echo $pBimester;
+		$pBimester	= $this->input->post('bimester',TRUE)."";
+		$pSubject	= $this->input->post('subject',TRUE)."";
+		$pGrado		= $this->input->post('grade',TRUE)."";
+		$pSeccion	= $this->input->post('section',TRUE)."";
+		$pAlumnos	= $this->input->post('alumno');
+		$pNotas		= $this->input->post('notas');
+		$alumnNotas	= array_merge($pAlumnos,$pNotas);
+		$this->load->model("abm/abm_record_model");
+		$countArray = count($pAlumnos);
+		for($i=0;$i<$countArray;$i++){
+			$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject, $pBimester, $pNotas[$i]);
+			echo $string."<br />";
+		}
+		/*echo $pBimester;
 		echo '<br />';
 		echo $pSubject;
 		echo '<br />';
@@ -35,11 +43,13 @@
 		echo '<br />';
 		echo $pSeccion;
 		echo '<br /><br />';
+		print_r($pAlumnos);
+		echo '<br /><br />';
 		print_r($pNotas);
 		echo '<br />';
 		echo '<br />';
 		echo '<br />';
-		
+		*/
 		
 	}
 	

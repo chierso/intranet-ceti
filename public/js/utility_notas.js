@@ -30,21 +30,21 @@ function init(){
 		  	$('#iGrade').val(''+grade);
 		  	$('#iSection').val(''+section);
 		  	$('#iSubject').val(''+subject);
-		  	
 		  	for (var incremento in alumnos)
 		    {
 		        alumno = alumnos[incremento];
 		        $('#tbody').append(
 		            '<tr>'
-		            +'<td>' + (incremento+1) + 
+		            +'<td>' + (incremento) + 
 		            '</td><td>' + alumno.fullname + 
 		            '</td>'+
 		            '<td>'+ 
-		            '<input data-id="'+alumno.id+'" name="notas[]" type="text" />'
+		            '<input type="hidden" name="alumno[]" value="'+alumno.id+'" />'+
+		            '<input name="notas[]" value="0" />'
 		            );    
 		    }
 		    $('#tbody').append('</td></tr><tr><td colspan="4"><input id="submitNotas" type="submit" class="btn btn-success" value="Insertar" /></td></tr>');
-		    $('input:radio').prop('checked', false);
+		    //$('input:radio').prop('checked', false);
 		  }
 		});
 		return false;	

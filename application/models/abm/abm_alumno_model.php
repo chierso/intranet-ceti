@@ -23,7 +23,8 @@ class abm_alumno_model extends CI_Model {
 		$this->db->like('concat(p.lastname," ",p.name)',$pAlumno,'both');
 		$this->db->like('r.grade',$pAno,'both');
 		$this->db->like('r.section',$pSeccion,'both');
-		$this->db->order_by('p.lastname','DESC');
+		$this->db->group_by('a.id_alumn');
+		$this->db->order_by('p.lastname','ASC');
 		$query = $this->db->get();
 		return $query->result();
 		
