@@ -8,8 +8,9 @@ class abm_alumno_model extends CI_Model {
 	
 	function listarAlumnos($pAno,$pSeccion){
 		//$sql = 'SELECT concat(p.name," " ,p.lastname) as Alumno, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
-		$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%'.$pAno.'%" AND r.section LIKE "%'.$pSeccion.'%" ;';
+		$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%'.$pAno.'%" AND r.section LIKE "%'.$pSeccion.'%" GROUP BY a.id_alumn ;';
 		$query = $this->db->query($sql);
+		
 		$data = $query->result();
 		return $data;
 	}
@@ -18,6 +19,7 @@ class abm_alumno_model extends CI_Model {
 	function buscarAlumno($pAlumno,$pAno,$pSeccion){
 		//$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%'.$pAno.'%" AND r.section LIKE "%'.$pSeccion.'%" ;';
 		$this->db->select('a.id_alumn AS id , concat(p.lastname, " ", p.name) AS fullname, r.grade AS grade, r.section as section',false);
+		//$this->db->select('a.id_alumn AS id , concat(p.lastname, " ", p.name) AS fullname, r.grade AS grade, r.section as section, SUM(rc.N1_average) as N1, SUM(rc.N2_average) as N2, SUM(rc.N3_average) as N3, SUM(rc.N4_average) as N4',false);
 		$this->db->from('tbl_person AS p, tbl_alumn AS a, tbl_registration AS r');
 		$this->db->where('a.id_person = p.id_person AND r.id_alumn = a.id_alumn');
 		$this->db->like('concat(p.lastname," ",p.name)',$pAlumno,'both');

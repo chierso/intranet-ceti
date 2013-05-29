@@ -18,7 +18,7 @@ function init(){
 		grade 	 = $("#grade").val();
 		section	 = $("input[name=rbt_section]:checked").val();
 		subject	 = $("#subject").val();
-		
+				
 		$.ajax({
 		  type: "POST",
 		  url: server+'abm/abm_alumn/buscar_alumn',
@@ -40,7 +40,7 @@ function init(){
 		            '</td>'+
 		            '<td>'+ 
 		            '<input type="hidden" name="alumno[]" value="'+alumno.id+'" />'+
-		            '<input name="notas[]" value="0" />'
+		            '<input name="notas[]" type="number" min="0" max="20" />'
 		            );    
 		    }
 		    $('#tbody').append('</td></tr><tr><td colspan="4"><input id="submitNotas" type="submit" class="btn btn-success" value="Insertar" /></td></tr>');

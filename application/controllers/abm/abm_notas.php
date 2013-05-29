@@ -22,7 +22,6 @@
 	
 	public function insert()
 	{
-		verifyRegistro();
 		$pBimester	= $this->input->post('bimester',TRUE)."";
 		$pSubject	= $this->input->post('subject',TRUE)."";
 		$pGrado		= $this->input->post('grade',TRUE)."";
@@ -32,10 +31,20 @@
 		$alumnNotas	= array_merge($pAlumnos,$pNotas);
 		$this->load->model("abm/abm_record_model");
 		$countArray = count($pAlumnos);
-		for($i=0;$i<$countArray;$i++){
-			$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject, $pBimester, $pNotas[$i]);
-			echo $string."<br />";
+		if(intval($pBimester)==1){
+			for($i=0;$i<$countArray;$i++){
+				$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject, $pBimester, $pNotas[$i]);
+				echo $string."<br />";
+			}
 		}
+		else{
+			for($i=0;$i<$countArray;$i++){
+				$idRecord = $this->abm_record_model->verify_record($pAlumnos[$i], $pGrado, $pSeccion, $pSubject);
+				$string = $this->abm_record_model->update_notas($idRecord,$pAlumnos[$i], $pGrado, $pSeccion, $pSubject, $pBimester, $pNotas[$i]);
+				echo $string." Updated<br />";
+			}			
+		}
+		
 		/*echo $pBimester;
 		echo '<br />';
 		echo $pSubject;

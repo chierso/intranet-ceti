@@ -28,9 +28,9 @@
 		</div>
 		<div class="row-fluid">
 			<?php
-				echo '<h3>Alumno: '.$cursos[0]->Alumno.'</h3>';
-			
+				echo '<h3>Alumno: '.$cursos[0]->Alumno.'</h3>';		
 			?>
+			<a class="btn" href="<?php echo site_url('reports/record/reporteAlumnoParametroPDF/'.$cursos[0]->id_alumn); ?>"><i class="icon-file"> </i>PDF</a>
 		<div class="span12">
 			<table class="table">
 				<thead>
