@@ -45,22 +45,112 @@
 			}			
 		}
 		
-		/*echo $pBimester;
-		echo '<br />';
-		echo $pSubject;
-		echo '<br />';
-		echo $pGrado;
-		echo '<br />';
-		echo $pSeccion;
-		echo '<br /><br />';
-		print_r($pAlumnos);
-		echo '<br /><br />';
-		print_r($pNotas);
-		echo '<br />';
-		echo '<br />';
-		echo '<br />';
-		*/
+	}
+	
+	public function insert_excel()
+	{
+		$pBimester  = 1;
+		//$pGrado		= $this->input->post('grade',TRUE)."";
+		//$pSeccion	= $this->input->post('section',TRUE)."";
+		$pGrado		= 3;
+		$pSeccion	= "A";
+		$pAlumnos	= $this->input->post('alumnos');
+		$pN1		= $this->input->post('notas1');
+		$pN2		= $this->input->post('notas2');
+		$pN3		= $this->input->post('notas3');
+		$pN4		= $this->input->post('notas4');
+		$pN5		= $this->input->post('notas5');
+		$pN6		= $this->input->post('notas6');
+		$pN7		= $this->input->post('notas7');
+		$pN8		= $this->input->post('notas8');
+		$pN9		= $this->input->post('notas9');
+		$pN10		= $this->input->post('notas10');
+		$pN11		= $this->input->post('notas11');
+		$pSubject1	= 3;
+		$pSubject2	= 8;
+		$pSubject3	= 12;
+		$pSubject4	= 13;
+		$pSubject5	= 2;
+		$pSubject6	= 7;
+		$pSubject7	= 1;
+		$pSubject8	= 5;
+		$pSubject9	= 6;
+		$pSubject10	= 4;
+		$pSubject11	= 14;
 		
+		$this->load->model("abm/abm_record_model");
+		$countArray = count($pAlumnos);
+			//if(intval($pBimester)==1){
+				for($i=0;$i<$countArray;$i++){
+				$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion);
+				$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject1, $pBimester, $pN1[$i]);
+					echo $string."<br />";
+				}
+				for($i=0;$i<$countArray;$i++){
+				$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion);
+					$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject2, $pBimester, $pN2[$i]);
+					echo $string."<br />";
+				}
+				for($i=0;$i<$countArray;$i++){
+				$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion);
+					$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject3, $pBimester, $pN3[$i]);
+					echo $string."<br />";
+				}
+				for($i=0;$i<$countArray;$i++){
+				$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion);
+					$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject4, $pBimester, $pN4[$i]);
+					echo $string."<br />";
+				}
+				for($i=0;$i<$countArray;$i++){
+				$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion);
+					$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject5, $pBimester, $pN5[$i]);
+					echo $string."<br />";
+				}
+				for($i=0;$i<$countArray;$i++){
+				$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion);
+					$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject6, $pBimester, $pN6[$i]);
+					echo $string."<br />";
+				}
+				for($i=0;$i<$countArray;$i++){
+				$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion);
+					$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject7, $pBimester, $pN7[$i]);
+					echo $string."<br />";
+				}
+				for($i=0;$i<$countArray;$i++){
+				$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion);
+					$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject8, $pBimester, $pN8[$i]);
+					echo $string."<br />";
+				}
+				for($i=0;$i<$countArray;$i++){
+				$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion);
+					$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject9, $pBimester, $pN9[$i]);
+					echo $string."<br />";
+				}
+				for($i=0;$i<$countArray;$i++){
+				$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion);
+					$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject10, $pBimester, $pN10[$i]);
+					echo $string."<br />";
+				}
+				for($i=0;$i<$countArray;$i++){
+				$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion);
+					$string = $this->abm_record_model->insertar_notas($pAlumnos[$i], $pGrado, $pSeccion, $pSubject11, $pBimester, $pN11[$i]);
+					echo $string."<br />";
+				}
+			//}
+			//else{
+				//for($i=0;$i<$countArray;$i++){
+				//	$idRecord = $this->abm_record_model->verify_record($pAlumnos[$i], $pGrado, $pSeccion, $pSubject);
+					//$string = $this->abm_record_model->update_notas($idRecord,$pAlumnos[$i], $pGrado, $pSeccion, $pSubject.$ij."", $pBimester, $pN.$ij."");
+					//echo $string." Updated<br />";
+			//	}			
+			//}	
+		
+	}
+
+	public function buscar_alumno_apellidos($pAlumno,$pAno,$pSeccion){
+		$this->load->model("abm/abm_alumno_model");
+		$id = $this->abm_alumno_model->buscar_alumno_retorna_id($pAlumno,$pAno,$pSeccion);
+		return $id;
 	}
 	
 	public function director()

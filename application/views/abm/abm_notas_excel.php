@@ -96,32 +96,22 @@
 				</div>
 				<div id="results">
 				<form id="abm_notas" method="POST" action="<?php echo site_url('abm/abm_notas/insert') ?>">
-		        <table class="table">
-				<thead>
-	                <tr>
-	                  <th>#</th>
-	                  <th>Alumno</th>
-	                  <th>Promedio</th>
-	              <!--<th>Grado</th>
-	                  <th>Sección</th>
-	                  <th>Acción</th>-->
-	                </tr>
-	            </thead>
-	                <input type="hidden" id="iBimester" name="bimester" value="" />
+		            <input type="hidden" id="iBimester" name="bimester" value="" />
 		            <input type="hidden" id="iSubject" name="subject" value="" />
 		            <input type="hidden" id="iGrade" name="grade" value="" />
 		            <input type="hidden" id="iSection" name="section" value="" />
-		            <tbody id="tbody">
 		            	<?php echo $tabla_excel; ?>
-		            </tbody>
-				</table>
-				</form><!--end-->
-				</div> 
+		        </form><!--end-->
+				</div>
+				<form id="frm_excel_sql">
+					<input type="submit" class="btn btn-success" value="Confirmar" />
+					<input type="reset" class="btn btn-danger" value="Cancelar" />
+				</form> 
 		</div>
 	<?php echo $this->load->view('template/_footer') ?> 
  	</div>
     </div> <!-- /container -->   
     <script src="<?php echo base_url("public/js/bootstrap.min.js")?>"></script>
-    <script src="<?php echo base_url("public/js/utility_notas.js")?>"></script>
+    <script src="<?php echo base_url("public/js/utility_excel.js")?>"></script>
 </body>
 </html>

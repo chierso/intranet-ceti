@@ -23,7 +23,7 @@ class abm_record_model extends CI_Model {
 				$idRegistration = $this->db->insert_id();
 			}
 			else{*/
-				$idRegistration = $this->verify_registration($pAlumno,$pGrado,$pSeccion,date('Y'));
+			$idRegistration = $this->verify_registration($pAlumno,$pGrado,$pSeccion,date('Y'));
 			//}
 				
 			$dataRecord = array(			
