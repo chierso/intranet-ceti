@@ -46,29 +46,20 @@
 						$html .="<td><input style='width:15px;' type='text' name='col".$j."[]' value='".trim($value)."' /></td>";
 				    }
 					else{
-						/*$cadenas = explode(" ",($value));
-						$mayu = "";
-						$minu = "";
-						foreach ($cadenas as $caso_prueba) {
-						    if (ctype_upper($caso_prueba)) {
-						        $mayu .= " ".$caso_prueba;
-						    } else {
-						        $minu .= " ".$caso_prueba;
-					    	}
-						}*/
 						$this->load->model("abm/abm_alumno_model");
-						$id = $this->abm_alumno_model->buscar_alumno_retorna_id($value, 3,"A");
+						$id = $this->abm_alumno_model->buscar_alumno_retorna_id(utf8_encode($value), 3,"A"); // aqui está la búsqueda.
 						$html .="<td>";
 						$html .="<input type='hidden' name='col1[]' value='".$id."' /><input class='input' type='text' name='col".$j."[]' value='".trim($value)."' /></td>";
 				    }
-					//$html .="<td>".trim((str_replace('  ',' ',str_replace(',',' ',$value))))."</td>";
+			
+			
 				}
 				$html .="</tr>";
 			}
 		}
 		$html .="</tbody></table>";	
-		$data['tabla_excel']=utf8_encode($html);
-		//$data['tabla_excel']=($html);
+		//$data['tabla_excel']=utf8_encode($html);
+		$data['tabla_excel']=($html);
 		$this->load->view('abm/abm_notas_excel',$data);	
 	}
 }

@@ -49,14 +49,12 @@ class abm_alumno_model extends CI_Model {
 		//return $row->id;
 //		$this->db->group_by('a.id_alumn');
 		
-		/*$target = '% '.strval($pAlumno).'%';
-		$target = str_replace("% ", "%", $target);
-		echo $pAlumno."-".$target;* */
 		$sql = 'SELECT a.id_alumn FROM (tbl_person  p, tbl_alumn  a, tbl_registration  r) WHERE a.id_person = p.id_person AND UPPER(concat((p.lastname)," ",p.name)) LIKE "%'.strtoupper($pAlumno).'%" AND r.grade LIKE "%' . $pAno . '%" AND r.section LIKE "%' . $pSeccion . '%" GROUP BY a.id_alumn';
 		//echo "<br />".$sql."<br />";
 		$query = $this -> db -> query($sql);
+		 
 		$data = $query -> result();
-		ECHO "<BR> NUMERO ".$query->num_rows();
+		ECHO "<BR> NUMERO ".$pAlumno.$query->num_rows();
 		
 		}
 
