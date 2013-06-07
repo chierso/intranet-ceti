@@ -52,11 +52,12 @@ class abm_alumno_model extends CI_Model {
 		/*$target = '% '.strval($pAlumno).'%';
 		$target = str_replace("% ", "%", $target);
 		echo $pAlumno."-".$target;* */
-		$sql = 'SELECT a.id_alumn FROM (tbl_person  p, tbl_alumn  a, tbl_registration  r) WHERE a.id_person = p.id_person AND concat((p.lastname)," ",p.name) LIKE "'.$pAlumno.'" AND r.grade LIKE "%' . $pAno . '%" AND r.section LIKE "%' . $pSeccion . '%" GROUP BY a.id_alumn COLLATE utf8_general_ci';
-		echo $sql;
+		$sql = 'SELECT a.id_alumn FROM (tbl_person  p, tbl_alumn  a, tbl_registration  r) WHERE a.id_person = p.id_person AND UPPER(concat((p.lastname)," ",p.name)) LIKE "%'.strtoupper($pAlumno).'%" AND r.grade LIKE "%' . $pAno . '%" AND r.section LIKE "%' . $pSeccion . '%" GROUP BY a.id_alumn';
+		//echo "<br />".$sql."<br />";
 		$query = $this -> db -> query($sql);
-		$data = $query -> result();	
-		return $data[0]->id_alumn;
+		$data = $query -> result();
+		ECHO "<BR> NUMERO ".$query->num_rows();
+		
 		}
 
 	function insertar_alumn($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion) {

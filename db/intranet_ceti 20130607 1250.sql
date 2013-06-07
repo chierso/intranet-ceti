@@ -32,9 +32,9 @@ USE intranet_ceti;
 --
 CREATE TABLE tbl_permission (
   id_permission INT(4) NOT NULL AUTO_INCREMENT,
-  key_permission VARCHAR(25) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  name VARCHAR(60) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  description TEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  key_permission VARCHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  name VARCHAR(60) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  description TEXT CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (id_permission),
   UNIQUE INDEX key_permission (key_permission)
 )
@@ -54,15 +54,15 @@ CREATE TABLE tbl_role (
 )
 ENGINE = INNODB
 AVG_ROW_LENGTH = 5461
-CHARACTER SET latin1
-COLLATE latin1_swedish_ci;
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 --
 -- Definition for table tbl_subject
 --
 CREATE TABLE tbl_subject (
   id_subject INT(11) NOT NULL AUTO_INCREMENT,
-  name VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  name VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (id_subject)
 )
 ENGINE = INNODB
@@ -71,10 +71,27 @@ AVG_ROW_LENGTH = 1489
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
 
+
+CREATE TABLE tbl_users(
+  id_user INT(11) NOT NULL AUTO_INCREMENT,
+  email VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  id_role VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  PRIMARY KEY (id_user),
+  INDEX FK_tbl_user_tbl_role_id_role (id_role),
+  CONSTRAINT FK_tbl_user_tbl_role_id_role FOREIGN KEY (id_role)
+  REFERENCES tbl_role (id_role) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 45
+AVG_ROW_LENGTH = 455
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 --
+
 -- Definition for table tbl_role_permission
 --
-CREATE TABLE tbl_role_permission (
+CREATE TABLE tbl_role_permission(
   id_role_permission INT(4) NOT NULL AUTO_INCREMENT,
   id_role VARCHAR(5) DEFAULT NULL,
   id_permission INT(11) DEFAULT NULL,
@@ -82,49 +99,35 @@ CREATE TABLE tbl_role_permission (
   INDEX FK_tlb_role_permission_tbl_permission_id_permission (id_permission),
   INDEX FK_tlb_role_permission_tbl_role_id_role (id_role),
   CONSTRAINT FK_tlb_role_permission_tbl_permission_id_permission FOREIGN KEY (id_permission)
-    REFERENCES tbl_permission(id_permission) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  REFERENCES tbl_permission (id_permission) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT FK_tlb_role_permission_tbl_role_id_role FOREIGN KEY (id_role)
-    REFERENCES tbl_role(id_role) ON DELETE RESTRICT ON UPDATE RESTRICT
+  REFERENCES tbl_role (id_role) ON DELETE RESTRICT ON UPDATE RESTRICT
 )
 ENGINE = INNODB
 AUTO_INCREMENT = 14
 AVG_ROW_LENGTH = 3276
-CHARACTER SET latin1
-COLLATE latin1_swedish_ci;
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 --
 -- Definition for table tbl_users
 --
-CREATE TABLE tbl_users (
-  id_user INT(11) NOT NULL AUTO_INCREMENT,
-  email VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `password` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  id_role VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  PRIMARY KEY (id_user),
-  INDEX FK_tbl_user_tbl_role_id_role (id_role),
-  CONSTRAINT FK_tbl_user_tbl_role_id_role FOREIGN KEY (id_role)
-    REFERENCES tbl_role(id_role) ON DELETE RESTRICT ON UPDATE RESTRICT
-)
-ENGINE = INNODB
-AUTO_INCREMENT = 45
-AVG_ROW_LENGTH = 455
-CHARACTER SET utf8
-COLLATE utf8_general_ci;
+
 
 --
 -- Definition for table tbl_person
 --
 CREATE TABLE tbl_person (
   id_person INT(11) NOT NULL AUTO_INCREMENT,
-  name VARCHAR(60) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  lastname VARCHAR(60) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  address VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  phone VARCHAR(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  cellphone VARCHAR(11) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  dni VARCHAR(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  sex VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `e-mail` VARCHAR(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  born VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  name VARCHAR(60) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  lastname VARCHAR(60) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  address VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  phone VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  cellphone VARCHAR(11) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  dni VARCHAR(8) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  sex VARCHAR(15) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `e-mail` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  born VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   id_user INT(11) DEFAULT NULL,
   PRIMARY KEY (id_person),
   UNIQUE INDEX id_user (id_user),
@@ -143,7 +146,7 @@ COLLATE utf8_general_ci;
 CREATE TABLE tbl_alumn (
   id_alumn INT(11) NOT NULL AUTO_INCREMENT,
   id_person INT(11) DEFAULT NULL,
-  `condition` VARCHAR(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `condition` VARCHAR(3) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (id_alumn),
   UNIQUE INDEX id_person (id_person),
   CONSTRAINT FK_tbl_alumn_tbl_person_id_person FOREIGN KEY (id_person)
@@ -179,8 +182,8 @@ CREATE TABLE tbl_registration (
   id_registration INT(11) NOT NULL AUTO_INCREMENT,
   id_alumn INT(11) DEFAULT NULL,
   id_docente INT(4) NOT NULL DEFAULT 1,
-  grade CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  section CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  grade CHAR(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  section CHAR(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `year` INT(4) DEFAULT NULL,
   PRIMARY KEY (id_registration),
   INDEX FK_tbl_registration_tbl_alumn_id_alumn (id_alumn),
