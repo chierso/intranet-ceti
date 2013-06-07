@@ -5,7 +5,7 @@
       {
          parent::__construct();
 		 $this->control_session->verifyLoginOnHome();
-		// $this->load->library('PHPExcel');
+
       }
 	
 	public function index()
