@@ -84,8 +84,7 @@
 			//if(intval($pBimester)==1){
 				for($i=0;$i<$countArray;$i++){
 					//$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion);
-					echo utf8_encode($pAlumnos[$i]);
-					$id 	= $this->buscar_alumno_apellidos(utf8_encode($pAlumnos[$i]), $pGrado, $pSeccion);
+					$id 	= $this->buscar_alumno_apellidos(utf8_encode("".$pAlumnos[$i].""), $pGrado, $pSeccion);
 					echo '<h2>'.$id.'</h2>';
 					$string = $this->abm_record_model->insertar_notas($id, $pGrado, $pSeccion, $pSubject1, $pBimester, $pN1[$i]);
 					$string = $this->abm_record_model->insertar_notas($id, $pGrado, $pSeccion, $pSubject2, $pBimester, $pN2[$i]);

@@ -31,21 +31,29 @@ class abm_alumno_model extends CI_Model {
 
 	function buscar_alumno_retorna_id($pAlumno, $pAno, $pSeccion) {
 		//$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%'.$pAno.'%" AND r.section LIKE "%'.$pSeccion.'%" ;';
-		//$this->db->select('alumno.id_alumn AS id');
+		
+		echo $pAlumno;
+		
+		$this->db->select('alumno.id_alumn AS id');
 		//$this->db->select('a.id_alumn AS id , concat(p.lastname, " ", p.name) AS fullname, r.grade AS grade, r.section as section, SUM(rc.N1_average) as N1, SUM(rc.N2_average) as N2, SUM(rc.N3_average) as N3, SUM(rc.N4_average) as N4',false);
-		//$this->db->from('tbl_person p, tbl_alumn alumno, tbl_registration r');
-		//$this->db->where('alumno.id_person = p.id_person AND r.id_alumn = alumno.id_alumn');
-		//$this->db->like('concat(p.lastname, " ", p.name)',$pAlumno, 'none');
-		//$this->db->like('r.grade',$pAno,'both');
-		//$this->db->like('r.section',$pSeccion,'both');
+		$this->db->from('tbl_person p, tbl_alumn alumno, tbl_registration r');
+		$this->db->where('alumno.id_person = p.id_person AND r.id_alumn = alumno.id_alumn');
+		$this->db->like('concat(p.lastname, " ", p.name)',quotes_to_entities($pAlumno), 'both');
+		$this->db->like('r.grade',$pAno,'both');
+		$this->db->like('r.section',$pSeccion,'both');
+		$query = $this->db->get();
+		echo $this->db->last_query(); 
+		$row   = $query->row();
+		return $row->id;
 //		$this->db->group_by('a.id_alumn');
-		//$pAlumno = '%'.utf8_encode($pAlumno . '%');
-		//echo $pAlumno;
-		$sql = 'SELECT a.id_alumn FROM (tbl_person  p, tbl_alumn  a, tbl_registration  r) WHERE a.id_person = p.id_person AND concat((p.lastname)," ",p.name) LIKE "' . $pAlumno . '" AND r.grade LIKE "%' . $pAno . '%" AND r.section LIKE "%' . $pSeccion . '%" GROUP BY a.id_alumn';
-		echo $sql;
+		
+		/*$target = '% '.strval($pAlumno).'%';
+		$target = str_replace("% ", "%", $target);
+		echo $pAlumno."-".$target;
+		$sql = 'SELECT a.id_alumn FROM (tbl_person  p, tbl_alumn  a, tbl_registration  r) WHERE a.id_person = p.id_person AND concat((p.lastname)," ",p.name) LIKE "'.$target.'" AND r.grade LIKE "%' . $pAno . '%" AND r.section LIKE "%' . $pSeccion . '%" GROUP BY a.id_alumn';
 		$query = $this -> db -> query($sql);
 		$data = $query -> result();	
-		return $data[0]->id_alumn;
+		return $data[0]->id_alumn;*/
 		}
 
 	function insertar_alumn($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion) {

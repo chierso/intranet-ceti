@@ -22,8 +22,8 @@ function init(){
               $(this).children("td").each(function (index2) {
                   switch (index2) {
 					case 1:
-                          alumno[indice] = "%"+$(this).text()+"%";
-                          //alumno[indice] = $(this).text();
+                          //alumno[indice] = "%"+$(this).text()+"%";
+                          alumno[indice] = ""+$(this).text()+"";
                           break;
                     case 2:
                           n1[indice] = $(this).text();
