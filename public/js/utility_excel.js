@@ -16,14 +16,15 @@ var nfilas 	= $('#tbl_excel > tbody > tr').length;
 	var indice  = 0;
 
 function init(){
-	$('#frm_excel_sql').on('submit',function (ev){
+	/*$('#frm_excel_sql').on('submit',function (ev){
 		ev.preventDefault();
 		$("#tbl_excel tbody tr").each(function (index) {
               $(this).children("td").each(function (index2) {
                   switch (index2) {
 					case 1:
-                          //alumno[indice] = "%"+$(this).text()+"%";
                           alumno[indice] = ""+$(this).text()+"";
+                          //alumno[indice] = "%"+$(this).text()+"%";
+                          //console.log(""+alumno[indice]);
                           break;
                     case 2:
                           n1[indice] = $(this).text();
@@ -65,7 +66,8 @@ function init(){
           
           // begin insert
           //var dataString = 'alumnos[]='+alumno+'&notas1[]='+n1+'&notas2[]='+n2+'&notas3[]='+n3+'&notas4[]='+n4+'&notas5[]='+n5+'&notas6[]='+n6+'&notas7[]='+n7+'&notas8[]='+n8+'&notas9[]='+n9+'&notas10[]='+n10+'&notas11[]='n11;
-          var dataString = {alumnos:alumno,notas1:n1,notas2:n2,notas3:n3,notas4:n4,notas5:n5,notas6:n6,notas7:n7,notas8:n8,notas9:n9,notas10:n10,notas11:n11}
+			var dataString = {alumnos:alumno,notas1:n1,notas2:n2,notas3:n3,notas4:n4,notas5:n5,notas6:n6,notas7:n7,notas8:n8,notas9:n9,notas10:n10,notas11:n11}
+          //console.log("toString: "+alumString);
           $.ajax({
 			  type: "POST",
 			  url: server+'abm/abm_notas/insert_excel',
@@ -75,10 +77,25 @@ function init(){
 				alert('debugeando o ke pedo?');
 			  },
 			  error: 
-			  	function(){console.log("error");}
+			  	function(ex){console.log("error"+ex);}
 			  
 		   });	
           
           return false;
-      })
+      })*/
+     $('#frm_excel_sql').on('submit',function (ev){
+		dataString = $(this).serialize();
+     	$.ajax({
+			type: "POST",
+			url: server+'abm/abm_notas/insert_excel',
+			data: dataString,
+			success: function(alumnos)
+			{
+				alert('debugeando o ke pedo?');
+			},
+			error: 
+				function(ex){console.log("error"+ex);}
+		   });	
+          return false;
+     });
 }

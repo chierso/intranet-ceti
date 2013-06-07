@@ -92,7 +92,6 @@ class abm_record_model extends CI_Model {
 	}
 	
 	function verify_registration($pAlumno, $pGrado, $pSeccion,$pYear){
-		echo 'holi-><h1>'.$pAlumno.'!</h1><br />';
 		$this->db->select('id_registration');
 		$this->db->from('tbl_registration');
 		$this->db->where('id_alumn = '.$pAlumno.' AND grade = '.$pGrado.' AND section = "'.$pSeccion.'" AND year ='.$pYear);

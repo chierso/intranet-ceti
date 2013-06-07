@@ -94,16 +94,10 @@
 				<div class="row-fluid">
 					<hr />
 				</div>
-				<div id="results">
-				<form id="abm_notas" method="POST" action="<?php echo site_url('abm/abm_notas/insert') ?>">
-		            <input type="hidden" id="iBimester" name="bimester" value="" />
-		            <input type="hidden" id="iSubject" name="subject" value="" />
-		            <input type="hidden" id="iGrade" name="grade" value="" />
-		            <input type="hidden" id="iSection" name="section" value="" />
+				<form id="frm_excel_sql" method="POST">
+		            
 		            	<?php echo $tabla_excel; ?>
-		        </form><!--end-->
-				</div>
-				<form id="frm_excel_sql">
+		
 					<input type="submit" class="btn btn-success" value="Confirmar" />
 					<input type="reset" class="btn btn-danger" value="Cancelar" />
 				</form> 
@@ -111,7 +105,7 @@
 	<?php echo $this->load->view('template/_footer') ?> 
  	</div>
     </div> <!-- /container -->   
-    <script src="<?php echo base_url("public/js/bootstrap.min.js")?>"></script>
+    <script src="<?php echo base_url("public/js/bootstrap.min.js")?>" charset="utf-8" ></script>
     <script src="<?php echo base_url("public/js/utility_excel.js")?>"></script>
 </body>
 </html>

@@ -20,7 +20,6 @@
 		$dato = new Spreadsheet_Excel_Reader($tname);
 		$html = '<table id="tbl_excel" style="font-size:12px;" class="table table-bordered"><thead>
 				<tr>
-				<th>N</th>
 				<th>Alumno</th>
 				';
 		for($ij=3;$ij<=13;$ij++)
@@ -33,18 +32,43 @@
 		$html .= '</tr>
 				</thead>';
 		$html .= '<tbody cellpadding="2" border="1">';
+		
 		for ($i = 4; $i <= $dato->rowcount($sheet_index=0); $i++) {
 			if($dato->val($i,2) != ''){
 				$html .= "<tr>";
-				for ($j = 1; $j <= /*$dato->colcount($sheet_index=0)*/13; $j++) { 
+				for ($j = 2; $j <= /*$dato->colcount($sheet_index=0)*/13; $j++) { 
 					$value 	 = $dato->val($i,$j);
-					$html .="<td>".trim(str_replace(',','',$value))."</td>";
+					$value   = str_replace(","," ",$value);
+					$value	 = str_replace("   "," ",$value);
+					$value	 = str_replace("  "," ",$value);
+					if($j!=2){
+						
+						$html .="<td><input style='width:15px;' type='text' name='col".$j."[]' value='".trim($value)."' /></td>";
+				    }
+					else{
+						/*$cadenas = explode(" ",($value));
+						$mayu = "";
+						$minu = "";
+						foreach ($cadenas as $caso_prueba) {
+						    if (ctype_upper($caso_prueba)) {
+						        $mayu .= " ".$caso_prueba;
+						    } else {
+						        $minu .= " ".$caso_prueba;
+					    	}
+						}*/
+						$this->load->model("abm/abm_alumno_model");
+						$id = $this->abm_alumno_model->buscar_alumno_retorna_id($value, 3,"A");
+						$html .="<td>";
+						$html .="<input type='hidden' name='col1[]' value='".$id."' /><input class='input' type='text' name='col".$j."[]' value='".trim($value)."' /></td>";
+				    }
+					//$html .="<td>".trim((str_replace('  ',' ',str_replace(',',' ',$value))))."</td>";
 				}
 				$html .="</tr>";
 			}
 		}
 		$html .="</tbody></table>";	
 		$data['tabla_excel']=utf8_encode($html);
+		//$data['tabla_excel']=($html);
 		$this->load->view('abm/abm_notas_excel',$data);	
 	}
 }
