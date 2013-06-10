@@ -5,14 +5,6 @@ class abm_alumno_model extends CI_Model {
 		parent::__construct();
 	}
 
-	function listarAlumnos($pAno, $pSeccion) {
-		//$sql = 'SELECT concat(p.name," " ,p.lastname) as Alumno, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
-		$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%' . $pAno . '%" AND r.section LIKE "%' . $pSeccion . '%" GROUP BY a.id_alumn ;';
-		$query = $this -> db -> query($sql);
-		$data = $query -> result();
-		return $data;
-	}
-
 	function buscarAlumno($pAlumno, $pAno, $pSeccion) {
 		//$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%'.$pAno.'%" AND r.section LIKE "%'.$pSeccion.'%" ;';
 		$this -> db -> select('a.id_alumn AS id , concat(p.lastname, " ", p.name) AS fullname, r.grade AS grade, r.section as section', false);
@@ -31,8 +23,7 @@ class abm_alumno_model extends CI_Model {
 
 	function buscar_alumno_retorna_id($pAlumno, $pAno, $pSeccion) {
 		//$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%'.$pAno.'%" AND r.section LIKE "%'.$pSeccion.'%" ;';
-		
-		
+
 		//$this->db->select('alumno.id_alumn AS id',false);
 		//$this->db->select('a.id_alumn AS id , concat(p.lastname, " ", p.name) AS fullname, r.grade AS grade, r.section as section, SUM(rc.N1_average) as N1, SUM(rc.N2_average) as N2, SUM(rc.N3_average) as N3, SUM(rc.N4_average) as N4',false);
 		//$this->db->from('tbl_person p, tbl_alumn alumno, tbl_registration r');
@@ -44,19 +35,19 @@ class abm_alumno_model extends CI_Model {
 		//$this->db->like('r.grade',$pAno,'both');
 		//$this->db->like('r.section',$pSeccion,'both');
 		//$query = $this->db->get();
-		//echo $this->db->last_query(); 
+		//echo $this->db->last_query();
 		//$row   = $query->row();
 		//return $row->id;
-//		$this->db->group_by('a.id_alumn');
-		
-		$sql = 'SELECT a.id_alumn FROM (tbl_person  p, tbl_alumn  a, tbl_registration  r) WHERE a.id_person = p.id_person AND UPPER(concat((p.lastname)," ",p.name)) LIKE "%'.strtoupper($pAlumno).'%" AND r.grade LIKE "%' . $pAno . '%" AND r.section LIKE "%' . $pSeccion . '%" GROUP BY a.id_alumn';
+		//		$this->db->group_by('a.id_alumn');
+
+		$sql = 'SELECT a.id_alumn FROM (tbl_person  p, tbl_alumn  a, tbl_registration  r) WHERE a.id_person = p.id_person AND UPPER(concat((p.lastname)," ",p.name)) LIKE "%' . strtoupper($pAlumno) . '%" AND r.grade LIKE "%' . $pAno . '%" AND r.section LIKE "%' . $pSeccion . '%" GROUP BY a.id_alumn';
 		//echo "<br />".$sql."<br />";
 		$query = $this -> db -> query($sql);
-		 
-		$data = $query -> result();
-		ECHO "<BR> NUMERO ".$pAlumno.$query->num_rows();
-		
-		}
+		$row = $query -> row();
+		return $row -> id_alumn;
+		//		ECHO "<BR> NUMERO ".$pAlumno.$query->num_rows();
+
+	}
 
 	function insertar_alumn($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion) {
 		$this -> load -> model("abm/abm_user_model");
@@ -87,8 +78,15 @@ class abm_alumno_model extends CI_Model {
 		 $this->email->to($pCorreo);
 		 $this->email->subject('Nuevo usuario registrado!');
 		 $this->email->message('Su cuenta ha sido correctamente habilitada, sus datos son : <br /> Usuario: '.$result[0]->email.' - Contraseña: '.$result[0]->password);
-		 $this->email->send();
-		 */
+		 $this->email->send();*/
+		return $data;
+	}
+
+	function listarAlumnos($pAno, $pSeccion) {
+		//$sql = 'SELECT concat(p.name," " ,p.lastname) as Alumno, a.grade, a.section FROM tbl_person p, tbl_alumn a WHERE a.id_person=p.id_person AND a.grade="'.$pAno.'" AND a.section="'.$pSeccion.'";';
+		$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%' . $pAno . '%" AND r.section LIKE "%' . $pSeccion . '%" GROUP BY a.id_alumn ;';
+		$query = $this -> db -> query($sql);
+		$data = $query -> result();
 		return $data;
 	}
 

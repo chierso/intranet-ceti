@@ -72,6 +72,11 @@
 	{
 			redirect('abm/abm_alumn', 'refresh');
 	}
+	
+	public function reporte_alumno_filtro()
+	{
+			redirect('reports/record', 'refresh');
+	}
 }
 
 /* End of file welcome.php */

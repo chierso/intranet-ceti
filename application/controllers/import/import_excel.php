@@ -58,8 +58,8 @@
 			}
 		}
 		$html .="</tbody></table>";	
-		//$data['tabla_excel']=utf8_encode($html);
-		$data['tabla_excel']=($html);
+		$data['tabla_excel']=utf8_encode($html);
+		//$data['tabla_excel']=($html);
 		$this->load->view('abm/abm_notas_excel',$data);	
 	}
 }

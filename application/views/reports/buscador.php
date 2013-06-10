@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Generador de Reportes</title>
+	<title>Generador de Reportes - Intranet CETI</title>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<link rel="stylesheet" href="<?php echo base_url("public/css/bootstrap.min.css")?>">
@@ -29,7 +29,7 @@
 		<div class="row-fluid">
 			<h3>Buscador de Alumnos</h3>
 		<div class="span12">
-			<form action="<?php echo site_url('record/reporteAlumnoParametro') ?>" method="get">
+			<form action="<?php echo site_url('reports/record/reporteAlumnoParametro') ?>" method="POST">
 				<input type="text" class="input-large" name="txt_alumn" value="" required="required" /><br />
 				<input type="submit" class="btn btn-success" value="Buscar" />
 			</form>
