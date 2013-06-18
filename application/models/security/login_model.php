@@ -14,7 +14,6 @@ class Login_model extends CI_Model
 		$this->db->limit(1);
 		$query = $this -> db -> get(); // SELECT id,email,password FROM usuarios WHERE 'email' = 'email' LIMIT 0,1
 		$data = $query->result(); // OBTIENES EL RESULTSET DE LA CONSULTA ANTERIOR
-		$this->load->model("achademyc_model");
 		if($data[0]->pwd==$password){
 			$this->session->set_userdata('IdUsuario',$data[0]->Id);
 			$this->session->set_userdata('E-Mail',$data[0]->Email);
