@@ -11,10 +11,10 @@ class record extends CI_Controller {
 		$this -> load -> view('reports/buscador');
 	}
 
-	public function reporteAlumnoParametro() {
-		$pAlumno = $this->input->post("txt_alumn",TRUE);
-		$this->load->model("abm/abm_alumno_model");
-		$id = $this->abm_alumno_model->buscar_alumno_retorna_id($pAlumno, "",""); // aqui está la búsqueda.				
+	public function reporteAlumnoParametro($pAlumno) {
+		//$this->load->model("abm/abm_alumno_model");
+		//$id = $this->abm_alumno_model->buscar_alumno_retorna_id($pAlumno, "",""); // aqui está la búsqueda.				
+		$id = $pAlumno;
 		$this -> load -> model('abm/abm_record_model');
 		$data['cursos'] = $this -> abm_record_model -> listar_notas($id);
 		$this -> load -> view('reports/r_alumno_parametro', $data);

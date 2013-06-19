@@ -16,6 +16,10 @@
 	public function xls2array() {
 		$name	  = $_FILES['file']['name'];
 		$tname 	  = $_FILES['file']['tmp_name'];
+		$pBimester=$this->input->post('rbt_bimester',TRUE)."";
+		$pAno=$this->input->post('cbx_grado',TRUE)."";
+		$pSeccion=$this->input->post('rbt_seccion',TRUE)."";
+		
 		require_once BASEPATH.'libraries/excel_reader2.php';
 		$dato = new Spreadsheet_Excel_Reader($tname);
 		$html = '<table id="tbl_excel" style="font-size:12px;" class="table table-bordered"><thead>
@@ -32,6 +36,9 @@
 		$html .= '</tr>
 				</thead>';
 		$html .= '<tbody cellpadding="2" border="1">';
+		$html .= '  <input type="hidden" name="bimester" value="'.$pBimester.'" />
+					<input type="hidden" name="grade" value="'.$pAno.'" />
+					<input type="hidden" name="section" value="'.$pSeccion.'" />';
 		
 		for ($i = 4; $i <= $dato->rowcount($sheet_index=0); $i++) {
 			if($dato->val($i,2) != ''){
@@ -47,7 +54,7 @@
 				    }
 					else{
 						$this->load->model("abm/abm_alumno_model");
-						$id = $this->abm_alumno_model->buscar_alumno_retorna_id(utf8_encode($value), 3,"A"); // aqui está la búsqueda.
+						$id = $this->abm_alumno_model->buscar_alumno_retorna_id(utf8_encode($value), $pAno,$pSeccion); // aqui está la búsqueda.
 						$html .="<td>";
 						$html .="<input type='hidden' name='col1[]' value='".$id."' /><input class='input' type='text' name='col".$j."[]' value='".trim($value)."' /></td>";
 				    }

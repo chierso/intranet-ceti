@@ -39,7 +39,7 @@
 		}
 		else{
 			for($i=0;$i<$countArray;$i++){
-				$idRecord = $this->abm_record_model->verify_record($pAlumnos[$i], $pGrado, $pSeccion, $pSubject);
+				$idRecord = $this->abm_record_model->get_id_record($pAlumnos[$i], $pGrado, $pSeccion, $pSubject);
 				$string = $this->abm_record_model->update_notas($idRecord,$pAlumnos[$i], $pGrado, $pSeccion, $pSubject, $pBimester, $pNotas[$i]);
 				echo $string." Updated<br />";
 			}			
@@ -49,12 +49,12 @@
 	
 	public function insert_excel()
 	{
-		$pBimester  = 1;
+		$pBimester  = $this->input->post('bimester');
+		$pGrado		= $this->input->post('grade');
+		$pSeccion	= $this->input->post('section');
 		//$pGrado		= $this->input->post('grade',TRUE)."";
 		//$pSeccion	= $this->input->post('section',TRUE)."";
 		//oprint_r(utf8_encode($this->input->post('alumnos')));
-		$pGrado		= 3;
-		$pSeccion	= "A";
 		$ids 		= $this->input->post('col1');
 		$pAlumnos	= $this->input->post('col2');
 		$pN1		= $this->input->post('col3');
@@ -115,7 +115,7 @@
 				/*}
 			//else{
 				//for($i=0;$i<$countArray;$i++){
-				//	$idRecord = $this->abm_record_model->verify_record($pAlumnos[$i], $pGrado, $pSeccion, $pSubject);
+				//	$idRecord = $this->abm_record_model->get_id_record($pAlumnos[$i], $pGrado, $pSeccion, $pSubject);
 					//$string = $this->abm_record_model->update_notas($idRecord,$pAlumnos[$i], $pGrado, $pSeccion, $pSubject.$ij."", $pBimester, $pN.$ij."");
 					//echo $string." Updated<br />";
 			//	}			

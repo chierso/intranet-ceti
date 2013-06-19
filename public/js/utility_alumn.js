@@ -20,18 +20,17 @@ function init(){
 		        alumno = alumnos[incremento];
 		        $('#tbody').append(
 		            '<tr>'
-		            +'<td>' + (incremento+1) + 
+		            +'<td>' +  (parseInt(parseInt(incremento++))).toString + 
 		            '</td><td>' + alumno.fullname + 
 		            '</td><td>' + alumno.grade + 
 		            '</td><td>' + alumno.section + 
 		            '</td><td>' + 
-		            '<a data-id="'+alumno.id+'" role="button" href="#modalAdd" class="btn btn-warning btn-mini"><i class="icon-white icon-edit"></i></a>'+
+		            '<a data-id="'+alumno.id+'" role="button" href="'+server+'reports/record/reporteAlumnoParametro/'+alumno.id+'" class="btn btn-info btn-mini" title="Ver Notas"><i class="icon-white icon-file"></i></a>'+
+					'<a data-id="'+alumno.id+'" role="button" href="#modalAdd" class="btn btn-warning btn-mini"><i class="icon-white icon-edit"></i></a>'+
 					' <a data-id="'+alumno.id+'" role="button" data-togle="modal" class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i></a>'
 		            + '</td></tr>'); 
-		        
 		    }
-		    $('input:radio').prop('checked', false);
-				  	
+		    //$('input:radio').prop('checked', false);  	
 		  }
 		});
 		return false;	

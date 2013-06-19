@@ -10,19 +10,7 @@ class abm_record_model extends CI_Model {
 		// first registration
 		$idRegistration = null;
 		$pBimester = "N" . $pBimester;
-		/*if($this->verify_registration($pAlumno,$pGrado,$pSeccion)==null){
-		 $dataRegistration = array(
-		 "id_alumn"	=> $pAlumno,
-		 "grade" 	=> $pGrado,
-		 "section"	=> $pSeccion,
-		 "year"		=> date('Y')
-		 );
-		 $this->db->insert('tbl_registration', $dataRegistration);
-		 $idRegistration = $this->db->insert_id();
-		 }
-		 else{*/
-		$idRegistration = $this -> verify_registration($pAlumno, $pGrado, $pSeccion, date('Y'));
-		//}
+		$idRegistration = $this -> get_id_registration($pAlumno, $pGrado, $pSeccion, date('Y'));
 
 		$dataRecord = array("id_subject" => $pCurso, $pBimester . "_average" => $pNota, "id_registration" => $idRegistration);
 		$this -> db -> insert('tbl_record', $dataRecord);
@@ -62,7 +50,7 @@ class abm_record_model extends CI_Model {
 		return $data;
 	}
 
-	function verify_record($pAlumno, $pGrado, $pSeccion, $pCurso) {
+	function get_id_record($pAlumno, $pGrado, $pSeccion, $pCurso) {
 		$this -> db -> select('rc.id_record');
 		$this -> db -> from('tbl_registration rg, tbl_record rc');
 		$this -> db -> where('rg.id_alumn = ' . $pAlumno . ' AND rg.grade = ' . $pGrado . ' AND rg.section = "' . $pSeccion . '" AND rc.id_subject = ' . $pCurso . ' AND rc.id_registration = rg.id_registration');
@@ -75,7 +63,7 @@ class abm_record_model extends CI_Model {
 		}
 	}
 
-	function verify_registration($pAlumno, $pGrado, $pSeccion, $pYear) {
+	function get_id_registration($pAlumno, $pGrado, $pSeccion, $pYear) {
 		$this -> db -> select('id_registration');
 		$this -> db -> from('tbl_registration');
 		$this -> db -> where('id_alumn = ' . $pAlumno . ' AND grade = ' . $pGrado . ' AND section = "' . $pSeccion . '" AND year =' . $pYear);
@@ -90,16 +78,18 @@ class abm_record_model extends CI_Model {
 
 	function agregarRegistration($pIdAlumno, $pGradeSection, $pYear) {
 		$this -> db -> trans_begin();
-		$query = $this -> db -> query('');
-		// this.db.query();
-		$dataRegistration = array("id_alumn" => $pIdAlumno, "grade_section" => $pGradeSection, "year" => $pYear);
-		$this -> db -> insert('tbl_registration', $dataRegistration);
+			$query = $this -> db -> query('');
+			// this.db.query();
+			$dataRegistration = array("id_alumn" => $pIdAlumno, "grade_section" => $pGradeSection, "year" => $pYear);
+			$this -> db -> insert('tbl_registration', $dataRegistration);
 		$this -> db -> trans_complete();
+		
 		if ($this -> db -> trans_status() == FALSE) {
 			$this -> db -> trans_roolback();
 		} else {
 			$this -> db -> trans_commit();
 		}
+		
 		return "Se insertó correctamente";
 	}
 }

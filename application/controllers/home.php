@@ -60,6 +60,11 @@
 			$this->load->view('abm/abm_subject',$output);
 	}
 	
+	public function import_excel()
+	{
+			redirect('import/import_excel', 'refresh');
+	}
+	
 	public function abm_asignacion()
 	{
 			$this->load->model("achademyc_model");

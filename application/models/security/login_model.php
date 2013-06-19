@@ -19,9 +19,31 @@ class Login_model extends CI_Model
 			$this->session->set_userdata('E-Mail',$data[0]->Email);
 			$this->session->set_userdata('Rol',$data[0]->Rol);
 			$this->session->set_userdata('Validado',"TRUE");
+			$this->session->set_userdata('Bimester',$this->setCurrentBimester());
 			return true;
 		}
 		return false;
+   }
+   
+   public function setCurrentBimester()
+   {
+		$today = date("Y-m-d");
+		$year  = date("Y");
+		$this->db->select('*',false);
+		$this->db->from('tbl_bimester');
+		$this->db->where('year = '.$year);
+		$query = $this->db->get();
+		$row = $query->row();
+		if($today <= $row->primer_bimestre){
+			return "I";
+		} else if($today <= $row->segundo_bimestre){
+			return "II";
+		} else if($today <= $row->tercer_bimestre){
+			return "III";
+		} else if($today <= $row->cuarto_bimestre){
+			return "IV";
+		} 
+		return "-";
    }
 }
 ?>

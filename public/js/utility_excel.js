@@ -83,19 +83,56 @@ function init(){
           
           return false;
       })*/
+     var pbar;
+     var progress;
+     var tiempo = nfilas*10;
      $('#frm_excel_sql').on('submit',function (ev){
 		dataString = $(this).serialize();
+		progreso();
+		$('html, body').animate({ scrollTop: 0 }, 'slow');
      	$.ajax({
 			type: "POST",
 			url: server+'abm/abm_notas/insert_excel',
 			data: dataString,
 			success: function(alumnos)
 			{
-				alert('debugeando o ke pedo?');
+				clearInterval(pbar);
+				clearInterval(progress);
+				$('#progress').css('width','100%');
+				$('#progress').text('100%');
+				$('.progress').removeClass('active');
+				
+				$("#msg").html('<div class="alert alert-success" id="exito"><b>Éxito!</b><br>Tus datos han sido cargados correctamente</div>'+
+				'<a href="'+server+'" class="btn btn-info">Regresar al Inicio</a><br><br>');
+				$("#frm_excel_sql").hide("fast");
 			},
-			error: 
-				function(ex){console.log("error"+ex);}
-		   });	
+			error: function(){
+				$("#msg").html('<div class="alert alert-error" id="exito"><b>Error!</b><br>Tus datos no pudieron ser cargados</div>');
+				console.log("error");
+			
+			}
+				
+		   });
+		   
+	function progreso(){
+		pbar = setTimeout(function(){
+	        $('#progress').each(function() {
+	            var me = $(this);
+	            var perc = me.attr("data-percentage");
+	        
+	            var current_perc = 0;
+	            progress = setInterval(function() {
+	                if (current_perc>=perc) {
+	                    clearInterval(progress);
+	                } else {
+	                    current_perc +=1;
+	                    me.css('width', (current_perc)+'%');
+	                }
+	                me.text((current_perc)+'%');
+	            }, tiempo);
+	        });
+    	},300);
+	}	
           return false;
      });
 }

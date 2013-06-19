@@ -12,6 +12,7 @@
 					<div class="span3">
 						<label for="grade">Grado: </label>
 						<select class="input" id="grade" name="cbx_grado">
+							<option value=""></option>
 							<option value="1">1 º</option>
 							<option value="2">2 º</option>
 							<option value="3">3 º</option>
@@ -57,6 +58,7 @@
 					echo '<td>'.$row->Grade.'</td>';
 					echo '<td>'.$row->Section.'</td>';
 					echo '<td>
+							<a data-id="'.$row->id_alumn.'" role="button" href="'.site_url("reports/record/reporteAlumnoParametro/".$row->id_alumn).'" class="btn btn-info btn-mini" title="Ver Notas"><i class="icon-white icon-file"></i></a>
 							<a data-id="'.$row->id_alumn.'" role="button" data-target="#modalEdit" data-toggle="modal" class="btn btn-warning btn-mini"><i class="icon-white icon-edit"></i></a>
 							<a data-id="'.$row->id_alumn.'" role="button" data-target="#modalDel" data-togle="modal" class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i></a>
 						  </td></tr>';	
