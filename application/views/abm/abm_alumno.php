@@ -40,7 +40,7 @@
 			</div>
 			<hr />
 			<div id="results">
-			<table class="table">
+			<table class="table table-striped">
 			<thead>
                 <tr>
                   <th>#</th>

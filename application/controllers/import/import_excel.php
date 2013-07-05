@@ -22,7 +22,7 @@
 		
 		require_once BASEPATH.'libraries/excel_reader2.php';
 		$dato = new Spreadsheet_Excel_Reader($tname);
-		$html = '<table id="tbl_excel" style="font-size:12px;" class="table table-bordered"><thead>
+		$html = '<table id="tbl_excel" style="font-size:12px;" class="table table-bordered table-striped"><thead>
 				<tr>
 				<th>Alumno</th>
 				';
@@ -31,7 +31,7 @@
 			$value 	 = $dato->val(4,$ij);
 			$value = utf8_decode(str_replace('Educación ','E.',utf8_encode($value))); 
 			$value = utf8_decode(str_replace('Formación ','F.',utf8_encode($value))); 
-			$html .= '<th>'.substr($value,0,10).'</th>';	
+			$html .= '<th width="7%">'.substr($value,0,10).'</th>';	
 		}
 		$html .= '</tr>
 				</thead>';
@@ -50,13 +50,14 @@
 					$value	 = str_replace("  "," ",$value);
 					if($j!=2){
 						
-						$html .="<td><input style='width:15px;' type='text' name='col".$j."[]' value='".trim($value)."' /></td>";
+						$html .="<td><input class='input-excel input-excel-full' type='text' name='col".$j."[]' value='".trim($value)."' /></td>";
 				    }
 					else{
 						$this->load->model("abm/abm_alumno_model");
 						$id = $this->abm_alumno_model->buscar_alumno_retorna_id(utf8_encode($value), $pAno,$pSeccion); // aqui está la búsqueda.
 						$html .="<td>";
-						$html .="<input type='hidden' name='col1[]' value='".$id."' /><input class='input' type='text' name='col".$j."[]' value='".trim($value)."' /></td>";
+						//$html .="<input type='hidden' name='col1[]' value='".$id."' /><input class='input-excel' type='text' name='col".$j."[]' value='".trim($value)."' dis /></td>";
+						$html .="<input type='hidden' name='col1[]' value='".$id."' />".trim($value)."</td>";
 				    }
 			
 			

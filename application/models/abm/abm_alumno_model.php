@@ -5,6 +5,13 @@ class abm_alumno_model extends CI_Model {
 		parent::__construct();
 	}
 
+	function get_id_alumn($pAlumno, $pAno, $pSeccion) {
+		$sql = 'SELECT a.id_alumn FROM (tbl_person  p, tbl_alumn  a, tbl_registration  r) WHERE a.id_person = p.id_person AND UPPER(concat((p.lastname)," ",p.name)) LIKE "%' . strtoupper($pAlumno) . '%" AND r.grade LIKE "%' . $pAno . '%" AND r.section LIKE "%' . $pSeccion . '%" GROUP BY a.id_alumn';
+		$query = $this -> db -> query($sql);
+		$row = $query -> row();
+		return $row -> id_alumn;
+	}
+	
 	function buscarAlumno($pAlumno, $pAno, $pSeccion) {
 		//$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%'.$pAno.'%" AND r.section LIKE "%'.$pSeccion.'%" ;';
 		$this -> db -> select('a.id_alumn AS id , concat(p.lastname, " ", p.name) AS fullname, r.grade AS grade, r.section as section', false);
@@ -25,9 +32,8 @@ class abm_alumno_model extends CI_Model {
 		$sql = 'SELECT a.id_alumn FROM (tbl_person  p, tbl_alumn  a, tbl_registration  r) WHERE a.id_person = p.id_person AND UPPER(concat((p.lastname)," ",p.name)) LIKE "%' . strtoupper($pAlumno) . '%" AND r.grade LIKE "%' . $pAno . '%" AND r.section LIKE "%' . $pSeccion . '%" GROUP BY a.id_alumn';
 		$query = $this -> db -> query($sql);
 		$row = $query -> row();
-		echo $this->db->last_query();
+		//echo $this->db->last_query();
 		return $row -> id_alumn;
-
 	}
 
 	function insertar_alumn($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion) {

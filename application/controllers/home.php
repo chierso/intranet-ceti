@@ -82,6 +82,11 @@
 	{
 			redirect('reports/record', 'refresh');
 	}
+
+	public function ver_notas()
+	{
+			redirect('reports/record/record_personal', 'refresh');
+	}
 }
 
 /* End of file welcome.php */

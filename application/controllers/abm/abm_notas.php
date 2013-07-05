@@ -56,7 +56,7 @@
 		//$pSeccion	= $this->input->post('section',TRUE)."";
 		//oprint_r(utf8_encode($this->input->post('alumnos')));
 		$ids 		= $this->input->post('col1');
-		$pAlumnos	= $this->input->post('col2');
+		//$pAlumnos	= $this->input->post('col2');
 		$pN1		= $this->input->post('col3');
 		$pN2		= $this->input->post('col4');
 		$pN3		= $this->input->post('col5');
@@ -80,8 +80,8 @@
 		$pSubject10	= 4;
 		$pSubject11	= 14;
 		$this->load->model("abm/abm_record_model");
-		print_r($pAlumnos);
-		$countArray = count($pAlumnos);
+		//print_r($pAlumnos);
+		$countArray = count($ids);
 			//if(intval($pBimester)==1){
 				for($i=0;$i<$countArray;$i++){
 					//$pAlumnos[$i] = $this->buscar_alumno_apellidos($pAlumnos[$i], $pGrado, $pSeccion

@@ -10,10 +10,21 @@ class record extends CI_Controller {
 	public function index() {
 		$this -> load -> view('reports/buscador');
 	}
-
+	
+	public function record_personal() {
+		//$this->load->model("abm/abm_alumno_model");
+		//$id = $this->abm_alumno_model->buscar_alumno_retorna_id($pAlumno, "",""); // aqui está la búsqueda.				
+		$this -> load -> model('abm/abm_alumno_model');
+		$id = $this->abm_alumno_model->get_id_alumn($this -> session -> userdata("Usuario"),'','');
+		$this -> load -> model('abm/abm_record_model');
+		$data['cursos'] = $this -> abm_record_model -> listar_notas($id);
+		$this -> load -> view('reports/r_alumno_parametro', $data);
+	}
+	
 	public function reporteAlumnoParametro($pAlumno) {
 		//$this->load->model("abm/abm_alumno_model");
 		//$id = $this->abm_alumno_model->buscar_alumno_retorna_id($pAlumno, "",""); // aqui está la búsqueda.				
+		
 		$id = $pAlumno;
 		$this -> load -> model('abm/abm_record_model');
 		$data['cursos'] = $this -> abm_record_model -> listar_notas($id);
@@ -23,12 +34,19 @@ class record extends CI_Controller {
 	public function reporteAlumnoParametroPDF($pAlumno) {
 		$pUsuario = $this -> session -> userdata("E-Mail");
 		$pTipoUsuario = $this -> session -> userdata("Rol");
+		$this -> load -> model('abm/abm_alumno_model');
+		$idLogeado = $this->abm_alumno_model->get_id_alumn($this -> session -> userdata("Usuario"),'','');
+			
 		if ($pTipoUsuario == 'dir')
 			$pTipoUsuario = "Director";
 		if ($pTipoUsuario == 'doc')
 			$pTipoUsuario = "Docente";
 		if ($pTipoUsuario == 'alum')
 			$pTipoUsuario = "Alumno";
+		if(($pTipoUsuario != "dir") AND (intval($pAlumno) != intval($idLogeado))){
+			redirect('error','refresh');
+		}
+
 		$this -> load -> model('abm/abm_record_model');
 		//$data = $this->abm_record_model->listar_notas($pAlumno);
 		$data = $this -> abm_record_model -> listar_notas($pAlumno);
@@ -37,7 +55,7 @@ class record extends CI_Controller {
 		headerPDF('IETI Santa Rosa de Lima', 'VÁLIDO SOLO PARA FINES INFORMATIVOS');
 		footerPDF(' Intranet IETI');
 		$this -> tcpdf -> AddPage();
-		$table = '<b>Reporte del alumno: </b>' . $data[0] -> Alumno . '<br />';
+		$table = '<b>Reporte del alumno: </b>' . $data[0] -> Alumno .'<br />';
 		$table .= '<b>Grado:</b> ' . $data[0] -> Grado . '<br /><b>Sección:</b> ' . $data[0] -> Seccion . '<br /><br /><br />';
 
 		$table .= '<table border="1" align="center" style="font-size:32px;">

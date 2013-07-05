@@ -9,18 +9,9 @@
 	
 	public function index()
 	{
-		$this->load->model("achademyc_model");
-		$data['docentes'] = $this->achademyc_model->listarDocentes();
+		$this->load->model("role_model");
 		$this->load->view('abm/abm_asignacion',$data);
 	}
 	
-	public function asignar_tutoria()
-	{
-		$pIdDocente	=	$this->input->post('id_docente',TRUE);
-		$pAno		=	$this->input->post('cbx_grado',TRUE)."";
-		$pSeccion	=	$this->input->post('rbt_seccion',TRUE)."";
-		$this->load->model("achademyc_model");
-		$this->achademyc_model->asignar_tutoria(intval($pIdDocente), $pAno, $pSeccion);
-	}
 
 }

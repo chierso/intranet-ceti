@@ -136,3 +136,12 @@ function init(){
           return false;
      });
 }
+
+$('.input-excel').focus(function(){
+	$(this).removeClass('input-excel').addClass('input-excel-full');
+});
+
+$('.input-excel').focusout(function(){
+	$(this).addClass('input-excel')
+});
+

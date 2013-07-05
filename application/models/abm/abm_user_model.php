@@ -15,7 +15,7 @@ class abm_user_model extends CI_Model {
 			$string .= $char;
 			$i++;
 		}
-		$dataUser = array("email" => $pCorreoElectronico, "password" => $string, "id_role" => $pRol);
+		$dataUser = array("email" => $pCorreoElectronico, "password" => md5($string), "id_role" => $pRol);
 		$this -> db -> insert('tbl_users', $dataUser);
 		$this -> db -> trans_complete();
 		$data = null;

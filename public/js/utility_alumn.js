@@ -20,7 +20,7 @@ function init(){
 		        alumno = alumnos[incremento];
 		        $('#tbody').append(
 		            '<tr>'
-		            +'<td>' +  (parseInt(parseInt(incremento++))).toString + 
+		            +'<td>' +  (parseInt(parseInt(incremento))).toString() + 
 		            '</td><td>' + alumno.fullname + 
 		            '</td><td>' + alumno.grade + 
 		            '</td><td>' + alumno.section + 
