@@ -9,8 +9,6 @@
 	</div>
 		<form id="frm_excel_sql" method="POST">
 			<?php echo $tabla_excel; ?>
-			<input type="submit" class="btn btn-success" value="Confirmar" />
-			<input type="reset" class="btn btn-danger" value="Cancelar" />
 		</form> 
     <script src="<?php echo base_url("public/js/utility_excel.js")?>"></script>
 <?php

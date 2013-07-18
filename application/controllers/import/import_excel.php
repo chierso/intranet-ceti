@@ -17,9 +17,9 @@
 		$name	  = $_FILES['file']['name'];
 		$tname 	  = $_FILES['file']['tmp_name'];
 		$pBimester=$this->input->post('rbt_bimester',TRUE)."";
-		$pAno=$this->input->post('cbx_grado',TRUE)."";
+		$pAno	=$this->input->post('cbx_grado',TRUE)."";
 		$pSeccion=$this->input->post('rbt_seccion',TRUE)."";
-		
+		$error = "";
 		require_once BASEPATH.'libraries/excel_reader2.php';
 		$dato = new Spreadsheet_Excel_Reader($tname);
 		$html = '<table id="tbl_excel" style="font-size:12px;" class="table table-bordered table-striped"><thead>
@@ -56,6 +56,9 @@
 					else{
 						$this->load->model("abm/abm_alumno_model");
 						$id = $this->abm_alumno_model->buscar_alumno_retorna_id(utf8_encode($value), $pAno,$pSeccion); // aqui está la búsqueda.
+						if($id<0){
+							$error.="<b>Error!</b> Error con el alumno ".utf8_encode($value)."<br />";
+						}
 						$html .="<td>";
 						//$html .="<input type='hidden' name='col1[]' value='".$id."' /><input class='input-excel' type='text' name='col".$j."[]' value='".trim($value)."' dis /></td>";
 						$html .="<input type='hidden' name='col1[]' value='".$id."' />".trim($value)."</td>";
@@ -66,7 +69,15 @@
 			}
 		}
 		$html .="</tbody></table>";	
-		$data['tabla_excel']=utf8_encode($html);
+		if($error!=""){
+			$html = '<div class="alert alert-error">'.$error.'</div>';
+		}
+		else
+			{
+				$html = utf8_encode($html).'<input type="submit" class="btn btn-success" value="Confirmar" />
+			<input type="reset" class="btn btn-danger" value="Cancelar" />';
+			}
+		$data['tabla_excel']=($html);
 		//$data['tabla_excel']=($html);
 		$this->load->view('abm/abm_notas_excel',$data);	
 	}

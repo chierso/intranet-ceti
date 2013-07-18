@@ -35,7 +35,8 @@ class abm_alumno_model extends CI_Model {
 		$query = $this -> db -> query($sql);
 		$row = $query -> row();
 		//echo $this->db->last_query();
-		return $row -> id_alumn;
+		if($query->num_rows()>0){return $row -> id_alumn;}
+		else{return -1;}
 	}
 
 	function insertar_alumn($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion) {

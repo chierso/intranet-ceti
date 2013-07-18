@@ -33,9 +33,10 @@ class habiles extends CI_Controller {
 		$data = $this -> abm_alumno_model -> buscarAlumno($alm,$ano,$sec);
 		$this -> load -> library('tcpdf/tcpdf');
 		$this -> load -> helper('tcpdf_helper');
-		headerPDF('IETI Santa Rosa de Lima', 'VÁLIDO SOLO PARA FINES INFORMATIVOS');
+		headerPDF(' ', ' ');
 		footerPDF(' Intranet IETI');
 		$this -> tcpdf -> AddPage();
+		$this->tcpdf->Image(base_url('public/img/logo.png'),75,10,60,20);
 		$table = '<center><h2>Reporte de Alumnos Habilitados e Inhabilitados</h2></center><br />';
 		$table .= '<br /><br /><br />';
 		$table .= '<table border="1" align="center" style="font-size:32px;">

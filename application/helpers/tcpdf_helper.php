@@ -9,8 +9,8 @@
         $CI->tcpdf->SetHeaderData('', 0, $pCabecera,$pSubCabecera);
 		//$CI->tcpdf->SetHeaderData('UNJFSC.png', 100, $pCabecera,$pSubCabecera);
 		$CI->tcpdf->setHeaderFont(Array('courier', '', '16'));
-		$CI->tcpdf->SetHeaderMargin(5);
-		$CI->tcpdf->SetMargins(15, 25, 10);
+		$CI->tcpdf->SetHeaderMargin(20);
+		$CI->tcpdf->SetMargins(15, 40, 10);
 	}
 	
 	function footerPDF($pPie)

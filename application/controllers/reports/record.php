@@ -43,7 +43,7 @@ class record extends CI_Controller {
 			$pTipoUsuario = "Docente";
 		if ($pTipoUsuario == 'alum')
 			$pTipoUsuario = "Alumno";
-		if(($pTipoUsuario != "dir") AND (intval($pAlumno) != intval($idLogeado))){
+		if(($pTipoUsuario != "Director") AND (intval($pAlumno) != intval($idLogeado))){
 			redirect('error','refresh');
 		}
 
@@ -52,9 +52,10 @@ class record extends CI_Controller {
 		$data = $this -> abm_record_model -> listar_notas($pAlumno);
 		$this -> load -> library('tcpdf/tcpdf');
 		$this -> load -> helper('tcpdf_helper');
-		headerPDF('IETI Santa Rosa de Lima', 'VÁLIDO SOLO PARA FINES INFORMATIVOS');
+		headerPDF('BOLETA DE NOTAS', '');
 		footerPDF(' Intranet IETI');
 		$this -> tcpdf -> AddPage();
+		$this->tcpdf->Image(base_url('public/img/logo.png'),10,10,60,20);
 		$table = '<b>Reporte del alumno: </b>' . $data[0] -> Alumno .'<br />';
 		$table .= '<b>Grado:</b> ' . $data[0] -> Grado . '<br /><b>Sección:</b> ' . $data[0] -> Seccion . '<br /><br /><br />';
 
