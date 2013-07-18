@@ -16,6 +16,7 @@ var nfilas 	= $('#tbl_excel > tbody > tr').length;
 	var indice  = 0;
 
 function init(){
+	validar();
 	/*$('#frm_excel_sql').on('submit',function (ev){
 		ev.preventDefault();
 		$("#tbl_excel tbody tr").each(function (index) {
@@ -135,6 +136,31 @@ function init(){
 	}	
           return false;
      });
+     
+     $('input.error_excel').focus(function(){
+     	$(this).removeClass('error_excel');
+     	validar();
+     });
+     
+     $('input.error_excel').focusout(function(){
+     	validar();
+     });
+     
+}
+
+
+
+function validar(){
+	//alert('error');
+	$('input.input-excel').each(function(){
+		var nota = $(this).val();
+		if((parseInt(nota)<=20) && (parseInt(nota)>=0)){
+		}
+		else
+		{
+			$(this).addClass('error_excel')
+		}
+	})
 }
 
 $('.input-excel').focus(function(){
@@ -144,4 +170,6 @@ $('.input-excel').focus(function(){
 $('.input-excel').focusout(function(){
 	$(this).addClass('input-excel')
 });
+
+
 

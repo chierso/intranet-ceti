@@ -24,14 +24,15 @@
 		$dato = new Spreadsheet_Excel_Reader($tname);
 		$html = '<table id="tbl_excel" style="font-size:12px;" class="table table-bordered table-striped"><thead>
 				<tr>
-				<th>Alumno</th>
+				<th height="120"><span>Alumno</span></th>
 				';
 		for($ij=3;$ij<=13;$ij++)
 		{
 			$value 	 = $dato->val(4,$ij);
-			$value = utf8_decode(str_replace('Educación ','E.',utf8_encode($value))); 
-			$value = utf8_decode(str_replace('Formación ','F.',utf8_encode($value))); 
-			$html .= '<th width="7%">'.substr($value,0,10).'</th>';	
+			//$value = utf8_decode(str_replace('Educación ','E.',utf8_encode($value))); 
+			//$value = utf8_decode(str_replace('Formación ','F.',utf8_encode($value))); 
+			//$html .= '<th width="7%"><span>'.substr($value,0,10).'</span></th>';
+			$html .= '<th width="7%" height="120"><span>'.$value.'</span></th>';	
 		}
 		$html .= '</tr>
 				</thead>';
@@ -50,7 +51,7 @@
 					$value	 = str_replace("  "," ",$value);
 					if($j!=2){
 						
-						$html .="<td><input class='input-excel input-excel-full' type='text' name='col".$j."[]' value='".trim($value)."' /></td>";
+						$html .="<td><input class='input-excel input-excel-full' required='required' type='number' name='col".$j."[]' min='0' max='20' value='".trim($value)."' /></td>";
 				    }
 					else{
 						$this->load->model("abm/abm_alumno_model");
@@ -59,7 +60,6 @@
 						//$html .="<input type='hidden' name='col1[]' value='".$id."' /><input class='input-excel' type='text' name='col".$j."[]' value='".trim($value)."' dis /></td>";
 						$html .="<input type='hidden' name='col1[]' value='".$id."' />".trim($value)."</td>";
 				    }
-			
 			
 				}
 				$html .="</tr>";
