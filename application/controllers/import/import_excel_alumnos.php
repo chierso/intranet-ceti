@@ -1,37 +1,32 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-	class import_excel extends CI_Controller {
+	class import_excel_alumnos extends CI_Controller {
 	
 	public function __construct()
-      {
+    {
          parent::__construct();
 		 $this->control_session->verifyLoginOnHome();
-
-      }
+    }
 	
 	public function index()
 	{
-		$this->load->view('util/import_excel');
+		$this->load->view('util/import_excel_alumnos');
 	}
 	
 	public function xls2array() {
 		$name	  = $_FILES['file']['name'];
 		$tname 	  = $_FILES['file']['tmp_name'];
 		$pBimester=$this->input->post('rbt_bimester',TRUE)."";
-		$pAno	=$this->input->post('cbx_grado',TRUE)."";
-		$pSeccion=$this->input->post('rbt_seccion',TRUE)."";
-		$error = "";
+		$pAno	  =$this->input->post('cbx_grado',TRUE)."";
+		$pSeccion =$this->input->post('rbt_seccion',TRUE)."";
+		$error    = "";
 		require_once BASEPATH.'libraries/excel_reader2.php';
 		$dato = new Spreadsheet_Excel_Reader($tname);
 		$html = '<table id="tbl_excel" style="font-size:12px;" class="table table-bordered table-striped"><thead>
-				<tr style="background:#2E2E2E;color:#fff;">
-				<th height="120">Alumno</th>
-				';
+				<tr>
+				<th height="120"><span>Alumno</span></th>';
 		for($ij=3;$ij<=13;$ij++)
 		{
 			$value 	 = $dato->val(4,$ij);
-			//$value = utf8_decode(str_replace('Educación ','E.',utf8_encode($value))); 
-			//$value = utf8_decode(str_replace('Formación ','F.',utf8_encode($value))); 
-			//$html .= '<th width="7%"><span>'.substr($value,0,10).'</span></th>';
 			$html .= '<th width="7%" height="120"><span>'.$value.'</span></th>';	
 		}
 		$html .= '</tr>
@@ -40,7 +35,6 @@
 		$html .= '  <input type="hidden" name="bimester" value="'.$pBimester.'" />
 					<input type="hidden" name="grade" value="'.$pAno.'" />
 					<input type="hidden" name="section" value="'.$pSeccion.'" />';
-		
 		for ($i = 4; $i <= $dato->rowcount($sheet_index=0); $i++) {
 			if($dato->val($i,2) != ''){
 				$html .= "<tr>";

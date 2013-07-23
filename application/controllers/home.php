@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-	class home extends CI_Controller {
-	
+	class home extends CI_Controller {	
 	public function __construct()
       {
          parent::__construct();
@@ -9,8 +8,7 @@
       }
 	
 	public function index()
-	{
-			
+	{		
 			$config = array('IdUsuario'=>$this->session->userdata('IdUsuario'));				
 			$this->load->library('acl',$config);				
 			$this->session->set_userdata('ACL',$this->acl->getPermisos()); 
@@ -87,7 +85,18 @@
 	{
 			redirect('reports/record/record_personal', 'refresh');
 	}
+	
+	public function habilitar()
+	{
+		redirect('habilitar','refresh');
+	}
+	
+	public function reportar_habiles()
+	{
+		redirect('reports/habiles','refresh');
+	}
+	
+	public function asignacion_bimestre(){
+		redirect('abm/abm_asignacion_bimestre','refresh');
+	}
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */

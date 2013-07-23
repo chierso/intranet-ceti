@@ -36,17 +36,19 @@ class habiles extends CI_Controller {
 		headerPDF(' ', ' ');
 		footerPDF(' Intranet IETI');
 		$this -> tcpdf -> AddPage();
-		$this->tcpdf->Image(base_url('public/img/logo.png'),75,10,60,20);
-		$table = '<center><h2>Reporte de Alumnos Habilitados e Inhabilitados</h2></center><br />';
-		$table .= '<br /><br /><br />';
+		$this->tcpdf->Image(base_url('public/img/logo.png'),0,10,200,27);
+		$table = '<div style="border:1px solid #000000;text-align:center;">
+					<h1><u>Reporte de Alumnos Habilitados e Inhabilitados</u></h1>
+				  </div>';
+		$table .= '<br /> <br />';
 		$table .= '<table border="1" align="center" style="font-size:32px;">
         			<thead>
-		                <tr bgcolor="#253E7C" style="color:#fff;font-weight:bold;">
-		            	  <th width="8%">Nº</th>
-		                  <th width="50%">Alumno</th>
-		                  <th width="8%">Año</th>
-		                  <th width="8%">Sección</th>
-		                  <th width="26%">Condición</th>
+		            	<tr bgcolor="#253E7C" style="color:#fff;font-weight:bold;">
+		            	  <th width="7%">Nº</th>
+		                  <th width="56%">Alumno</th>
+		                  <th width="6%">Año</th>
+		                  <th width="13%">Sección</th>
+		                  <th width="18%">Condición</th>
 		            	</tr>
 	            	</thead>
         			<tbody>';
@@ -54,11 +56,11 @@ class habiles extends CI_Controller {
 		foreach ($data as $row) {
 			if($row->condicion=='I'){$cond='<span style="color:#ff0000;">Inhabilitado</span>';}else{$cond='Habilitado';}
 			$table .= '<tr style="height:35px;" bgcolor="#CEE3F6" >'.
-			'<td width="8%" align="right">'.$indice.'</td>'.
-			'<td width="50%" align="left">'.$row->fullname.'</td>'.
-			'<td width="8%" align="center">'.$row->grade.'</td>'.
-			'<td width="8%" align="center">'.$row->section.'</td>'.
-			'<td width="26%" align="center">'.$cond.'</td>'.
+			'<td width="7%" align="right">'.$indice.'</td>'.
+			'<td width="56%" align="left">'.$row->fullname.'</td>'.
+			'<td width="6%" align="center">'.$row->grade.'</td>'.
+			'<td width="13%" align="center">'.$row->section.'</td>'.
+			'<td width="18%" align="center">'.$cond.'</td>'.
 			'</tr>';
 			$indice++;
 		}

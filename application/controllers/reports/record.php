@@ -52,13 +52,15 @@ class record extends CI_Controller {
 		$data = $this -> abm_record_model -> listar_notas($pAlumno);
 		$this -> load -> library('tcpdf/tcpdf');
 		$this -> load -> helper('tcpdf_helper');
-		headerPDF('BOLETA DE NOTAS', '');
+		headerPDF(' ', '');
 		footerPDF(' Intranet IETI');
 		$this -> tcpdf -> AddPage();
-		$this->tcpdf->Image(base_url('public/img/logo.png'),10,10,60,20);
-		$table = '<b>Reporte del alumno: </b>' . $data[0] -> Alumno .'<br />';
+		$this->tcpdf->Image(base_url('public/img/logo.png'),0,10,200,27);
+		$table = '<div style="border:1px solid #000000;text-align:center;">
+					<h1><u>BOLETA DE NOTAS </u></h1>
+				  </div>';
+		$table .= '<br /> <br /><b>Reporte del alumno: </b>' . $data[0] -> Alumno .'<br />';
 		$table .= '<b>Grado:</b> ' . $data[0] -> Grado . '<br /><b>Sección:</b> ' . $data[0] -> Seccion . '<br /><br /><br />';
-
 		$table .= '<table border="1" align="center" style="font-size:32px;">
         			<thead>
 	                <tr bgcolor="#253E7C" style="color:#fff;font-weight:bold;">
@@ -86,13 +88,11 @@ class record extends CI_Controller {
 			 <td width="10%">' . $promedio . '</td>
 			</tr>';
 		}
-
 		$table .= '</tbody></table><br /><br />';
-		$this -> tcpdf -> writeHTML($table, true, 0, true, 0);
+		$this -> tcpdf -> writeHTML($table, true, false, true, false,'');
 		$this -> tcpdf -> lastPage();
 		$this -> tcpdf -> writeHTML('Reporte emitido por <b>' . $pTipoUsuario . '</b>(' . $pUsuario . ')  : ' . date("d/m/Y H:i:s"), true, 0, true, 0);
 		$this -> tcpdf -> Output('ReporteAlumno-' . $pAlumno . '.pdf', 'I');
-
 	}
 
 }

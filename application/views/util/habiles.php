@@ -47,7 +47,8 @@
 				<table class="table table-striped">
 				<thead>
 	                <tr>
-	                  <th>    </th>
+	                  <!--<th width="50"><a href="javascript:void(0)" id="all">Todos</a><br /><a href="javascript:void(0)" id="none" >Ninguno</a></th>-->
+	                  <th><input id="all" name="checktodos" type="checkbox" /></th>
 	                  <th>Alumno</th>
 	                  <th>Grado</th>
 	                  <th>Sección</th>

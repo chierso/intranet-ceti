@@ -111,3 +111,13 @@ function init(){
 		else{return 'HABILITADO';}
 	}
 }
+
+$("#all").change(function(){
+	$('#habilitar input[type=checkbox]').each( function() {			
+		if($("input[name=checktodos]:checked").length == 1){
+			this.checked = true;
+		} else {
+			this.checked = false;
+		}
+	});
+});
