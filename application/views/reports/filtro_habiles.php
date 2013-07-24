@@ -7,7 +7,7 @@
 				<form method="post" id="filtro">
 					<div class="span4">
 						<label for="Buscador">Buscador: </label>
-						<input type="text" id="Buscador" name="txt_search" class="span12" placeholder="EJ. Carlos" />
+						<input type="text" id="txt_bus" name="txt_search" class="span12" placeholder="EJ. Carlos" />
 					</div>
 					<div class="span3">
 						<label for="grade">Grado: </label>
@@ -23,13 +23,13 @@
 					<div class="span3">
 						<label>Sección: </label>
 						<label class="radio inline"> 
-					  		<input type="radio" name="rbt_seccion" value="A">A
+					  		<input type="checkbox" name="chkseccion[]" value="A" />A
 						</label>
 						<label class="radio inline"> 
-					  		<input type="radio" name="rbt_seccion" value="B">B
+					  		<input type="checkbox" name="chkseccion[]" value="B" />B
 						</label>
 						<label class="radio inline"> 
-							<input type="radio" name="rbt_seccion" value="C">C
+							<input type="checkbox" name="chkseccion[]" value="C" />C
 						</label>
 					</div>
 					<div class="span2">
@@ -43,11 +43,11 @@
 			<table class="table table-striped">
 			<thead>
                 <tr>
-                  <th>#</th>
+                  <th>Nº</th>
                   <th>Alumno</th>
                   <th>Grado</th>
                   <th>Sección</th>
-                  <th>Acción</th>
+                  <th>Condición</th>
                 </tr>
             </thead>
             <tbody id="tbody">
@@ -62,7 +62,6 @@
 	<a class="btn btn-info" id="reportar">Exportar a PDF</a>
 			 </div> 
 	</div>
-	<script src="http://localhost:81/intranet-ceti/public/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url("public/js/util_habiles.js")?>"></script>
 <?php
 	echo $this->load->view('inc/footer');    

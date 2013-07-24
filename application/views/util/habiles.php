@@ -23,13 +23,13 @@
 					<div class="span3">
 						<label>Sección: </label>
 						<label class="radio inline"> 
-					  		<input type="radio" name="rbt_seccion" value="A">A
+					  		<input type="checkbox" name="chkseccion[]" value="A" />A
 						</label>
 						<label class="radio inline"> 
-					  		<input type="radio" name="rbt_seccion" value="B">B
+					  		<input type="checkbox" name="chkseccion[]" value="B" />B
 						</label>
 						<label class="radio inline"> 
-							<input type="radio" name="rbt_seccion" value="C">C
+							<input type="checkbox" name="chkseccion[]" value="C" />C
 						</label>
 					</div>
 					<div class="span2">
@@ -44,7 +44,7 @@
 			</div>
 			<div id="results">
 			<form id="habilitar" method="POST">
-				<table class="table table-striped">
+				<table class="table table-striped table-condensed">
 				<thead>
 	                <tr>
 	                  <!--<th width="50"><a href="javascript:void(0)" id="all">Todos</a><br /><a href="javascript:void(0)" id="none" >Ninguno</a></th>-->
@@ -52,18 +52,11 @@
 	                  <th>Alumno</th>
 	                  <th>Grado</th>
 	                  <th>Sección</th>
+	                  <th>Condición</th>
 	                </tr>
 	            </thead>
 	            <tbody id="tbody">
-				<?php $cont = 1;
-					foreach($alumnos as $row){
-						echo '<tr><td><input type="checkbox" name="check[]" value='.$row->id_alumn.'/></td>';$cont++;
-						echo '<td>'.$row->Alumno.'</td>';
-						echo '<td>'.$row->Grade.'</td>';
-						echo '<td>'.$row->Section.'</td>';
-						echo '</tr>';	
-					}
-				 ?>
+
 				 </tbody>
 				 </table>
 				 <input type="button" id="hab" class="btn btn-success" value="Habilitar" />
@@ -73,6 +66,5 @@
 	</div>
     <script src="<?php echo base_url("public/js/util_habiles.js")?>"></script>
 <?php
-	echo $this->load->view('modals/m_abm_alumno');
 	echo $this->load->view('inc/footer');    
 ?>

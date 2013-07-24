@@ -11,34 +11,20 @@
 	<link rel="stylesheet" href="<?php echo base_url("public/css/bootstrap.min.css")?>">
 	<link rel="stylesheet" href="<?php echo base_url("public/css/bootstrap-responsive.min.css")?>">
 	<link rel="stylesheet" href="<?php echo base_url("public/css/style.css")?>">    
-	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head> 
 <body> 
 <div class="container">	
 	<h1>Intranet Académica</h1>
 	<div id="form_login">	
-		<?php
-			$this->load->helper("form");
-			echo form_open("login/sendLogin");
-		
-			echo form_label("Email: ");
-			echo '<input type="text" required class="input-block-level" name="txt_usuario" placeholder="Correo electrónico">';
-			echo form_error('email');
-			echo "<br/>";
-			
-			// Generamos el campo password
-			echo form_label("Password: ");
-			echo '<input type="password" required class="input-block-level" name="txt_password" placeholder="Contraseña">';
-			echo form_error("password");
-			echo "<br/>";
-			
-			// Generamos el botón de submit
-			echo '
-		        <button class="btn btn-large btn-primary" type="submit">Acceder</button>';
-			echo form_close();
-		?>
+		<form id="login" method="post">
+			<div id="msg"></div>
+			<input type="text" required class="input-block-level" name="txt_usuario" placeholder="Correo electrónico">
+			<input type="password" required class="input-block-level" name="txt_password" placeholder="Contraseña">
+			<button class="btn btn-large btn-primary" type="submit">Acceder</button>
+		</form>
 	</div>
+	<script src="<?php echo base_url("public/js/login.js")?>"></script>
 	<hr />
 	Intranet Académica - IETI "SANTA ROSA DE LIMA"
 	</div>

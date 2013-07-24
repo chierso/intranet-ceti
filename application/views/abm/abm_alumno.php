@@ -23,13 +23,13 @@
 					<div class="span3">
 						<label>Sección: </label>
 						<label class="radio inline"> 
-					  		<input type="radio" name="rbt_seccion" value="A">A
+					  		<input type="checkbox" name="chkseccion[]" value="A" />A
 						</label>
 						<label class="radio inline"> 
-					  		<input type="radio" name="rbt_seccion" value="B">B
+					  		<input type="checkbox" name="chkseccion[]" value="B" />B
 						</label>
 						<label class="radio inline"> 
-							<input type="radio" name="rbt_seccion" value="C">C
+							<input type="checkbox" name="chkseccion[]" value="C" />C
 						</label>
 					</div>
 					<div class="span2">
@@ -40,10 +40,10 @@
 			</div>
 			<hr />
 			<div id="results">
-			<table class="table table-striped">
+			<table class="table table-striped table-condensed">
 			<thead>
                 <tr>
-                  <th>#</th>
+                  <th>Nº</th>
                   <th>Alumno</th>
                   <th>Grado</th>
                   <th>Sección</th>
@@ -59,7 +59,7 @@
 					echo '<td>'.$row->Section.'</td>';
 					echo '<td>
 							<a data-id="'.$row->id_alumn.'" role="button" href="'.site_url("reports/record/reporteAlumnoParametro/".$row->id_alumn).'" class="btn btn-info btn-mini" title="Ver Notas"><i class="icon-white icon-file"></i></a>
-							<a data-id="'.$row->id_alumn.'" role="button" data-target="#modalEdit" data-toggle="modal" class="btn btn-warning btn-mini"><i class="icon-white icon-edit"></i></a>
+							<a data-action="edit" data-id="'.$row->id_alumn.'" role="button" data-target="#modalEdit" data-toggle="modal" class="btn btn-warning btn-mini"><i class="icon-white icon-edit"></i></a>
 							<a data-id="'.$row->id_alumn.'" role="button" data-target="#modalDel" data-togle="modal" class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i></a>
 						  </td></tr>';	
 				}

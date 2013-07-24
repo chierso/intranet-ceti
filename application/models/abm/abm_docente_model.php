@@ -14,7 +14,7 @@ class abm_docente_model extends CI_Model {
 
 	function insertar_docente($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo) {
 		$this -> load -> model("abm/abm_user_model");
-		$this -> abm_user_model -> registrarUsuario($pCorreo, 'doc');
+		$pwd = $this -> abm_user_model -> registrarUsuario($pDni, 'doc');
 		$this -> db -> trans_begin();
 		$dataPersona = array("name" => $pNombres, "lastname" => $pApellidos, "address" => $pDireccion, "phone" => $pTelefono, "cellphone" => $pCelular, "dni" => $pDni, "sex" => $pSexo, "e-mail" => $pCorreo, "born" => $pNacimiento);
 		$this -> db -> insert('tbl_person', $dataPersona);
@@ -25,10 +25,10 @@ class abm_docente_model extends CI_Model {
 		$data = null;
 		if ($this -> db -> trans_status() === FALSE) {
 			$this -> db -> trans_rollback();
-			$data = "Error! No se pudo registrar.";
+			$data = "error";
 		} else {
 			$this -> db -> trans_commit();
-			$data = "Correcto! Los datos se cargaron correctamente.";
+			$data = $pwd;
 		}
 		return $data;
 	}

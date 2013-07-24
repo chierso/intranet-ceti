@@ -1,21 +1,24 @@
-	<?php
-		$this->load->helper("form");
-		echo form_open("abm/abm_alumn/registrar_alumn");
-	?>
+<?php
+	$data['title'] = "Registrar nuevo Alumno - INTRANET IETI";
+	echo $this->load->view('inc/header',$data);
+?>
+	<h1>Registrar Alumno</h1>
+	<div id="msg"></div>
+	<form id="add_alumn" method="POST">
 	<input type="hidden" name="tipo_persona" value="alumn" />
 	<div class="row-fluid">
 		<div class="span6">
 			<label for="Nombres">Nombres</label>
-			<input type="text" id="Nombres" name="txt_nombres" class="span12" placeholder="EJ. Carlos Antonio" size="16" />
+			<input required="required" type="text" id="Nombres" name="txt_nombres" class="span12" placeholder="EJ. Carlos Antonio" size="16" />
 		</div>
 		<div class="span6">
 			<label for="Apellidos">Apellidos</label>
-			<input type="text" id="Apellidos" name="txt_apellidos" class="span12" placeholder="EJ. Eguizabal Torres" size="16" />
+			<input required="required" type="text" id="Apellidos" name="txt_apellidos" class="span12" placeholder="EJ. Eguizabal Torres" size="16" />
 		</div>
 		<div class="row-fluid">
 			<div class="span8">
 				<label for="Direccion">Dirección</label>
-				<input type="text" id="Direccion" name="txt_direccion" class="span12"  placeholder="EJ. Av. Mercedes Indacochoa Mz. A - LT 03" size="16" />
+				<input required="required" type="text" id="Direccion" name="txt_direccion" class="span12"  placeholder="EJ. Av. Mercedes Indacochoa Mz. A - LT 03" size="16" />
 			</div>
 			<div class="span4">
 			  	<label for="dni">DNI</label>
@@ -84,8 +87,9 @@
 	</div>
 	<button class="btn btn-success" type="submit">Agregar</button>
 	<button class="btn" type="reset">Cancelar</button>
-	<?php
-		echo form_close();
-	?>
+	</form>
 <script src="<?php echo base_url("public/js/bootstrap-datepicker.js")?>"></script>
 <script src="<?php echo base_url("public/js/utility.js")?>"></script>
+<?php
+	echo $this->load->view('inc/footer');
+?>

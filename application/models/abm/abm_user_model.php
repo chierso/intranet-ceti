@@ -17,14 +17,15 @@ class abm_user_model extends CI_Model {
 		}
 		$dataUser = array("email" => $pCorreoElectronico, "password" => md5($string), "id_role" => $pRol);
 		$this -> db -> insert('tbl_users', $dataUser);
+		$id = $this -> db -> insert_id();
 		$this -> db -> trans_complete();
 		$data = null;
 		if ($this -> db -> trans_status() === FALSE) {
 			$this -> db -> trans_rollback();
-			$data = array("tipoMensaje" => "E", "mensaje" => "No se pudo registrar");
+			$data = "error";
 		} else {
 			$this -> db -> trans_commit();
-			$data = array("tipoMensaje" => "S", "mensaje" => "El registro del beneficiado");
+			$data = $string."|".$id;
 		}
 		return $data;
 	}

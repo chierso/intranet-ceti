@@ -58,6 +58,7 @@ function init(){
 		            '</td><td>' + alumno.fullname + 
 		            '</td><td>' + alumno.grade + 
 		            '</td><td>' + alumno.section + 
+		            '</td><td>' + alumno.condicion + 
 		            '</td>' + 
 		            '</tr>'); 
 		    }
@@ -97,7 +98,7 @@ function init(){
 		return false;	
 	});
 	$('#reportar').on('click',function(){
-		var txtx = $('#Buscador').val();
+		var txtx = $('#txt_bus').val();
 		var grado = $('#grade').val();
 		var section = $('input:radio[name=rbt_seccion]:checked').val();
 		if(section == undefined){section="";}

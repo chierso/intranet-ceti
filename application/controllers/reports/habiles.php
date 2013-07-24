@@ -18,17 +18,10 @@ class habiles extends CI_Controller {
 		$ano = $this->input->post('cbx_grado',TRUE)."";
 		$sec = $this->input->post('rbt_seccion',TRUE)."";
 		$this -> load -> model('abm/abm_alumno_model');
-		$idLogeado = $this->abm_alumno_model->get_id_alumn($this -> session -> userdata("Usuario"),'','');
-			
-		if ($pTipoUsuario == 'dir')
-			$pTipoUsuario = "Director";
-		if ($pTipoUsuario == 'doc')
-			$pTipoUsuario = "Docente";
-		if ($pTipoUsuario == 'alum')
-			$pTipoUsuario = "Alumno";
-		if(($pTipoUsuario != "dir") AND (intval($pAlumno) != intval($idLogeado))){
-			redirect('error','refresh');
+		if($pTipoUsuario=="alum"){
+			$idLogeado = $this->abm_alumno_model->get_id_alumn($this -> session -> userdata("Usuario"),'','');	
 		}
+		
 
 		$data = $this -> abm_alumno_model -> buscarAlumno($alm,$ano,$sec);
 		$this -> load -> library('tcpdf/tcpdf');
@@ -41,6 +34,7 @@ class habiles extends CI_Controller {
 					<h1><u>Reporte de Alumnos Habilitados e Inhabilitados</u></h1>
 				  </div>';
 		$table .= '<br /> <br />';
+		
 		$table .= '<table border="1" align="center" style="font-size:32px;">
         			<thead>
 		            	<tr bgcolor="#253E7C" style="color:#fff;font-weight:bold;">

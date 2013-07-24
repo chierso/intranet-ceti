@@ -1,51 +1,46 @@
 <div id="modalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <form method="post" action="<?php echo base_url("abm/abm_subject/asignar_tutoria")?>" id="frm_edit_alumn">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-      <h3 id="myModalLabel">Asignar Tutoría</h3>
+      <h3 id="myModalLabel">Editar Alumno</h3>
     </div>
     <div class="modal-body">
       <p>
-        <form method="post" action="<?php echo base_url("abm/abm_subject/asignar_tutoria")?>" id="frm_add">
-          Docente : <span id="pDocente"></span>
+          Alumno : <span id="pAlumno"></span>
           <hr />
-          <input type="hidden" name="id_docente" id="id_docente" value="0" />
-          <div class="row-fluid">
-      <div class="span6">
-        <label for="grade">Grado: </label>
-        <select id="grade" name="cbx_grado">
-          <option value="1">1 º</option>
-          <option value="2">2 º</option>
-          <option value="3">3 º</option>
-          <option value="4">4 º</option>
-          <option value="5">5 º</option>  
-        </select>
-      </div>
-      <div class="span6">
-        <label>Sección: </label>
-        <label class="radio inline"> 
-            <input type="radio" name="rbt_seccion" value="A">A
-        </label>
-        <label class="radio inline"> 
-            <input type="radio" name="rbt_seccion" value="B">B
-        </label>
-        <label class="radio inline"> 
-          <input type="radio" name="rbt_seccion" value="C">C
-        </label>
-      </div>
-  </div>
-  <input type="submit" value="add" class="btn" />
-        </form>        
-      </p>
+      <input type="hidden" name="txt_person" id="id_person" value="0" />
+      <div class="row-fluid">
+  			<div class="row-fluid">
+				<div class="span12">
+					<label for="Direccion">Dirección</label>
+					<input required="required" type="text" id="pDireccion" name="txt_direccion" class="span12"  placeholder="EJ. Av. Mercedes Indacochoa Mz. A - LT 03" size="16" />
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12">
+				  	<div class="input-prepend">
+						<label for="prepended Input">Correo electrónico</label>			
+						<span class="add-on">@</span>
+						<input required="required" class="span12" id="pEmail" id="prepended Input" name="txt_email" type="email">					
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span6">
+					<label for="Telefono">Teléfono</label>
+					<input required="required" type="text" id="pTelefono" name="txt_telefono" class="span12" placeholder="EJ. 7482005" size="16" />
+				</div>
+				<div class="span6">
+					<label for="Celular">Celular</label>
+					<input required="required" type="text" id="pCelular" name="txt_celular" class="span12" placeholder="EJ. 97412587" size="16" />
+				</div>
+			</div>
+	  </div>
+  			</p>
     </div>
     <div class="modal-footer">
-      <div class="row-fluid fila_datos">
-        <div class="progress progress-striped span7">
-        <div class="bar"></div>
-      </div>
-      <div>
-        <button type="submit" name="btn_confirmar" class="btn btn-primary">Guardar</button>
-          <button type="button" name="btn_cancelar2" class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-      </div>                
-      </div>          
-    </div>
+        <input type="submit" class="btn btn-primary" value="Guardar" />
+        <input type="button" data-dismiss="modal" aria-hidden="true" class="btn btn-dangerr" value="Cancelar" />
+      </div>     
+      </form>     
 </div>

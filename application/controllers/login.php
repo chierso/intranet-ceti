@@ -22,8 +22,11 @@ class login extends CI_Controller {
 			$valor=$this->login_model->tryLogin("$usuario","$password");
 			if($valor)
 			{
-				redirect('home', 'refresh');
+				echo 'logged';
 			}	
+			else{
+				echo 'error';
+			}
 			
        }	
        

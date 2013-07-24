@@ -1,8 +1,10 @@
-	<?php
-		$this->load->helper("form");
-		echo form_open("abm/abm_docente/registrar_docente");
-	?>
-	
+<?php
+	$data['title'] = "Registrar Nuevo Docente - INTRANET IETI";
+	echo $this->load->view('inc/header',$data);
+?>
+	<h1>Registrar Docente</h1>
+	<div id="msg"></div>
+	<form id="add_docente" method="POST">
 	<div class="row-fluid">
 		<div class="span6">
 			<label for="Nombres">Nombres</label>
@@ -60,8 +62,9 @@
 	</div>
 	<button class="btn btn-success" type="submit">Agregar</button>
 	<button class="btn" type="reset">Cancelar</button>
-	<?php
-		echo form_close();
-	?>
+</form>
 <script src="<?php echo base_url("public/js/bootstrap-datepicker.js")?>" ="utf-8"></script>
 <script src="<?php echo base_url("public/js/utility.js")?>" ="utf-8"></script>
+<?php
+	echo $this->load->view('inc/footer');
+?>
