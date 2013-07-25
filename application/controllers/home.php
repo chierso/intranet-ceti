@@ -81,5 +81,9 @@ class home extends CI_Controller {
 	public function asignacion_bimestre() {
 		redirect('abm/abm_asignacion_bimestre', 'refresh');
 	}
+	
+	public function import_alum(){
+		redirect('import/import_excel_alumnos', 'refresh');
+	}
 
 }

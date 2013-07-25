@@ -10,7 +10,12 @@ class abm_record_model extends CI_Model {
 		$this -> db -> from('tbl_person AS p, tbl_alumn AS a, tbl_registration AS r, tbl_record AS rc, tbl_subject AS s');
 		$this -> db -> where('r.id_alumn = ' . $pAlumno . ' AND a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND rc.id_registration =  r.id_registration AND s.id_subject = rc.id_subject');
 		$query = $this -> db -> get();
-		return ($query -> result());
+		if($query->num_rows()>0){
+			return ($query -> result());	
+		}
+		else {
+			return "error";
+		}
 	}
 
 	function update_notas($pIdAlumno, $pGrado, $pSeccion, $pCurso, $pBimester, $pNota) {

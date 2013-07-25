@@ -12,6 +12,13 @@ class abm_alumno_model extends CI_Model {
 		return $row -> id_alumn;
 	}
 	
+	function get_condicion_alumn($pIdAlumno) {
+		$sql = 'SELECT a.condition FROM tbl_alumn a WHERE a.id_alumn = '.$pIdAlumno.' GROUP BY a.id_alumn';
+		$query = $this -> db -> query($sql);
+		$row = $query -> row();
+		return $row -> condition;
+	}
+	
 	function buscarAlumno($pAlumno, $pAno, $pSeccion) {
 		//$sql = 'SELECT a.id_alumn , concat(p.name, " ", p.lastname) AS Alumno , r.grade AS Grade, r.section as Section FROM tbl_person p, tbl_alumn a, tbl_registration r WHERE a.id_person = p.id_person AND r.id_alumn = a.id_alumn AND r.grade LIKE "%'.$pAno.'%" AND r.section LIKE "%'.$pSeccion.'%" ;';
 		//print_r($pSeccion);
@@ -51,6 +58,7 @@ class abm_alumno_model extends CI_Model {
 	function insertar_alumn($pNombres, $pApellidos, $pDireccion, $pDni, $pTelefono, $pCelular, $pSexo, $pNacimiento, $pCorreo, $pAno, $pSeccion) {
 		$this -> load -> model("abm/abm_user_model");
 		$miniArray = $this -> abm_user_model -> registrarUsuario($pDni, 'alum');
+		$miniArray = explode("|",$miniArray);
 		$idUser = $miniArray[1];
 		$this -> db -> trans_begin();
 		$dataPersona = array("name" => $pNombres, "lastname" => $pApellidos, "address" => $pDireccion, "phone" => $pTelefono, "cellphone" => $pCelular, "dni" => $pDni, "sex" => $pSexo, "e-mail" => $pCorreo, "born" => $pNacimiento, "id_user" => $idUser);

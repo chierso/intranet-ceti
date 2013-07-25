@@ -7,7 +7,7 @@
 	<div class="progress progress-striped active" >
   		<div id="progress" class="bar" style="width: 0%;" data-percentage="100"></div>
 	</div>
-		<form id="frm_excel_sql" method="POST">
+		<form id="frm_excel_alm" method="POST">
 			<?php echo $tabla_excel; ?>
 		</form> 
     <script src="<?php echo base_url("public/js/utility_excel.js")?>"></script>

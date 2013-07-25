@@ -16,9 +16,21 @@ class record extends CI_Controller {
 		//$id = $this->abm_alumno_model->buscar_alumno_retorna_id($pAlumno, "",""); // aqui está la búsqueda.				
 		$this -> load -> model('abm/abm_alumno_model');
 		$id = $this->abm_alumno_model->get_id_alumn($this -> session -> userdata("Usuario"),'','');
+		$condicion = $this->abm_alumno_model->get_condicion_alumn($id);
 		$this -> load -> model('abm/abm_record_model');
 		$data['cursos'] = $this -> abm_record_model -> listar_notas($id);
-		$this -> load -> view('reports/r_alumno_parametro', $data);
+		if($condicion!="H"){
+			$data['error'] = "No tienes permiso suficiente o no estás habilitado para la intranet debido a acumulación de deuda.";
+			$this->load->view('error',$data);
+		}
+		else if($data['cursos']=="error"){
+			$data['error'] = "Aún no hay notas registradas.";
+			$this->load->view('error',$data);
+		}
+		else{
+			$this -> load -> view('reports/r_alumno_parametro', $data);	
+		}
+		
 	}
 	
 	public function reporteAlumnoParametro($pAlumno) {
